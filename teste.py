@@ -176,7 +176,7 @@ while jogar == 's':
 
             elif c1_mesa != 'A' and c2_mesa == 'A':
                 pontuacao_mesa1 = c1_mesa + 1
-                pontuacao_mesa2 = c2_mesa + 11
+                pontuacao_mesa2 = c1_mesa + 11
                 if c1_mesa == 10:
                     print('Blackjack!')
                     print('A mesa tem 21!')
