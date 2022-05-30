@@ -174,7 +174,7 @@ while jogar == 's':
                 pontuacao_mesa2 = pontuacao_mesa1
                 print('A mesa tem {} pontos'.format(pontuacao_mesa1))
 
-            if c1_mesa != 'A' and c2_mesa == 'A':
+            elif c1_mesa != 'A' and c2_mesa == 'A':
                 pontuacao_mesa1 = c1_mesa + 1
                 pontuacao_mesa2 = c2_mesa + 11
                 if c1_mesa == 10:
@@ -184,7 +184,7 @@ while jogar == 's':
                 else:
                     print('A mesa tem {} ou {} pontos'.format(pontuacao_mesa1,pontuacao_mesa2))
             
-            if c1_mesa == 'A' and c2_mesa != 'A':
+            elif c1_mesa == 'A' and c2_mesa != 'A':
                 pontuacao_mesa1 = c2_mesa + 1
                 pontuacao_mesa2 = c2_mesa + 11
                 if c2_mesa == 10:
@@ -194,7 +194,7 @@ while jogar == 's':
                 else:
                     print('A mesa tem {} ou {} pontos'.format(pontuacao_mesa1,pontuacao_mesa2))
             
-            if c1_mesa == 'A' and c2_mesa == 'A':
+            elif c1_mesa == 'A' and c2_mesa == 'A':
                 pontuacao_mesa1 = 2
                 pontuacao_mesa2 = 12
                 print('A mesa tem 2 ou 12 pontos')
@@ -209,15 +209,15 @@ while jogar == 's':
                         print('Você ganhou {} fichas'.format(aposta))
                         fichas += aposta
                         
-                    if blackjack_mesa == False and blackjack_player == False:
+                    elif blackjack_mesa == False and blackjack_player == False:
                         print('Empate!')
                         print('Você ganhou {} fichas'.format(aposta))
                         fichas += aposta
                         
-                    if blackjack_mesa == True and blackjack_player == False:
+                    elif blackjack_mesa == True and blackjack_player == False:
                         print('Você perdeu {} fichas'.format(aposta))
                         
-                    if blackjack_mesa == False and blackjack_player == True:
+                    elif blackjack_mesa == False and blackjack_player == True:
                         print('Você ganhou {} fichas'.format(2*aposta))
                         fichas += aposta*2
 
@@ -241,7 +241,7 @@ while jogar == 's':
                             pontuacao_mesa1 += 1
                             pontuacao_mesa2 += 1
                         elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
-                            pontuacao_mesa1 += 11
+                            pontuacao_mesa1 += 1
                             pontuacao_mesa2 += 1
 
                     if extra_mesa != 'A':
@@ -280,7 +280,7 @@ while jogar == 's':
                         print('Você ganhou {} fichas'.format(aposta*2))
                         fichas += 2*aposta
 
-            while pontuacao_player > pontuacao_mesa2 or pontuacao_player > pontuacao_mesa1:
+            while pontuacao_player > pontuacao_mesa2:
                 extra_mesa = random.choice(lista_cartas)
                 print('Carta extra mesa: {}'.format(extra_mesa))
                 #lista_cartas.remove(extra_mesa)
