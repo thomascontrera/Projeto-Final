@@ -205,25 +205,25 @@ while jogar == 's':
                         print('Empate!')
                         print('Você ganhou {} fichas'.format(aposta))
                         fichas += aposta
-                        break
-                    if blackjack_mesa == False and blackjack_player == False:
+                        
+                    elif blackjack_mesa == False and blackjack_player == False:
                         print('Empate!')
                         print('Você ganhou {} fichas'.format(aposta))
                         fichas += aposta
-                        break
-                    if blackjack_mesa == True and blackjack_player == False:
+                        
+                    elif blackjack_mesa == True and blackjack_player == False:
                         print('Você perdeu {} fichas'.format(aposta))
-                        break
-                    if blackjack_mesa == False and blackjack_player == True:
+                        
+                    elif blackjack_mesa == False and blackjack_player == True:
                         print('Você ganhou {} fichas'.format(2*aposta))
                         fichas += aposta*2
-                        break
+                        
 
                 elif pontuacao_player >= 17:
                     print('Empate!')
                     print('Você ganhou {} fichas'.format(aposta))
                     fichas += aposta
-                    break
+                    
                 
                 else:
                     extra_mesa = random.choice(lista_cartas)
