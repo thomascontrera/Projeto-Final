@@ -253,14 +253,14 @@ while jogar == 's':
                             print('A mesa fez {}'.format(pontuacao_mesa))
                             print('Você perdeu {} fichas'.format(aposta))
                             
-                        if pontuacao_mesa1 > pontuacao_player:
+                        elif pontuacao_mesa1 > pontuacao_player:
                             pontuacao_mesa = pontuacao_mesa1
                             print('A mesa fez {}'.format(pontuacao_mesa))
                             print('Você perdeu {} fichas'.format(aposta))
                             
-                        if pontuacao_mesa1 != pontuacao_mesa2:
+                        elif pontuacao_mesa1 != pontuacao_mesa2:
                             print('A mesa tem {} ou {}'.format(pontuacao_mesa1,pontuacao_mesa2))
-                        if pontuacao_mesa1 == pontuacao_mesa2:
+                        elif pontuacao_mesa1 == pontuacao_mesa2:
                             print('A mesa tem {}'.format(pontuacao_mesa1))
   
                     if pontuacao_mesa1 <= 21 and pontuacao_mesa2 > 21:
@@ -269,9 +269,9 @@ while jogar == 's':
                             print('A mesa fez {}'.format(pontuacao_mesa))
                             print('Você perdeu {} fichas'.format(aposta))
                     
-                        if pontuacao_mesa1 != pontuacao_mesa2:
+                        elif pontuacao_mesa1 != pontuacao_mesa2:
                             print('A mesa tem {} ou {}'.format(pontuacao_mesa1,pontuacao_mesa2))
-                        if pontuacao_mesa1 == pontuacao_mesa2:
+                        elif pontuacao_mesa1 == pontuacao_mesa2:
                             print('A mesa tem {}'.format(pontuacao_mesa1))
                       
                     if pontuacao_mesa1 > 21 and pontuacao_mesa2 > 21:
@@ -307,25 +307,22 @@ while jogar == 's':
                         pontuacao_mesa = pontuacao_mesa2
                         print('A mesa fez {}'.format(pontuacao_mesa))
                         print('Você perdeu {} fichas'.format(aposta))
-                        break
                         
-                    if pontuacao_mesa1 > pontuacao_player:
+                    elif pontuacao_mesa1 > pontuacao_player:
                         pontuacao_mesa = pontuacao_mesa1
                         print('A mesa fez {}'.format(pontuacao_mesa))
                         print('Você perdeu {} fichas'.format(aposta))
-                        break
                         
-                    if pontuacao_mesa2 == pontuacao_player:
+                    elif pontuacao_mesa2 == pontuacao_player:
                         if pontuacao_mesa1 >= 17:
                             print('A mesa fez {}'.format(pontuacao_mesa2))
                             print('Empate!')
                             print('Você ganhou {} fichas'.format(aposta))
                             fichas += aposta
-                            break
-                    
-                    if pontuacao_mesa1 != pontuacao_mesa2:
+                            
+                    elif pontuacao_mesa1 != pontuacao_mesa2:
                         print('A mesa tem {} ou {}'.format(pontuacao_mesa1,pontuacao_mesa2))
-                    if pontuacao_mesa1 == pontuacao_mesa2:
+                    elif pontuacao_mesa1 == pontuacao_mesa2:
                         print('A mesa tem {}'.format(pontuacao_mesa1))
   
                 if pontuacao_mesa1 <= 21 and pontuacao_mesa2 > 21:
@@ -333,16 +330,15 @@ while jogar == 's':
                         pontuacao_mesa = pontuacao_mesa1
                         print('A mesa fez {}'.format(pontuacao_mesa))
                         print('Você perdeu {} fichas'.format(aposta))
-                        break
-                    if pontuacao_mesa1 == pontuacao_player:
+                        
+                    elif pontuacao_mesa1 == pontuacao_player:
                         if pontuacao_mesa1 >= 17:
                             print('A mesa fez {}'.format(pontuacao_mesa1))
                             print('Empate!')
                             print('Você ganhou {} fichas'.format(aposta))
                             fichas += aposta
-                            break
-                    
-                    print('A mesa tem {}'.format(pontuacao_mesa1))
+                    else:
+                        print('A mesa tem {}'.format(pontuacao_mesa1))
                       
                 if pontuacao_mesa1 > 21 and pontuacao_mesa2 > 21:
                     print('{}! Estorou!'.format(pontuacao_mesa1))
