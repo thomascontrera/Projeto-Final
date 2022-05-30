@@ -131,10 +131,10 @@ while jogar == 's':
                 if pontuacao_player1 <= 10 and pontuacao_player2 <= 10:
                     pontuacao_player1 += 1
                     pontuacao_player2 += 11
-                if pontuacao_player1 > 10 and pontuacao_player2 > 10:
+                elif pontuacao_player1 > 10 and pontuacao_player2 > 10:
                     pontuacao_player1 += 1
                     pontuacao_player2 += 1
-                if pontuacao_player1 <= 10 and pontuacao_player2 > 10:
+                elif pontuacao_player1 <= 10 and pontuacao_player2 > 10:
                     pontuacao_player1 += 1
                     pontuacao_player2 += 1
 
