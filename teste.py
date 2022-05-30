@@ -281,6 +281,7 @@ while jogar == 's':
                         fichas += 2*aposta
 
             while pontuacao_player > pontuacao_mesa2:
+
                 extra_mesa = random.choice(lista_cartas)
                 print('Carta extra mesa: {}'.format(extra_mesa))
                 #lista_cartas.remove(extra_mesa)
@@ -345,8 +346,49 @@ while jogar == 's':
                     print('{}! Estorou!'.format(pontuacao_mesa1))
                     print('Você ganhou {} fichas'.format(aposta*2))
                     fichas += 2*aposta
-                    
 
+            while pontuacao_player > pontuacao_mesa1 and pontuacao_mesa2 > pontuacao_player:
+                if pontuacao_mesa2 > 21:
+                    extra_mesa = random.choice(lista_cartas)
+                    print('Carta extra mesa: {}'.format(extra_mesa))
+
+                    if extra_mesa in cartas.keys():
+                        extra_mesa = cartas[extra_mesa]
+                
+                    if extra_mesa == 'A':
+                        if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
+                            pontuacao_mesa1 += 1
+                            pontuacao_mesa2 += 11
+                        elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
+                            pontuacao_mesa1 += 1
+                            pontuacao_mesa2 += 1
+                        elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
+                            pontuacao_mesa1 += 11
+                            pontuacao_mesa2 += 1
+
+                    if extra_mesa != 'A':
+                        pontuacao_mesa1 += extra_mesa
+                        pontuacao_mesa2 += extra_mesa
+
+                    if pontuacao_mesa1 <= 21:
+                        if pontuacao_mesa1 > pontuacao_player:
+                            print('A mesa fez')
+                            print('Você perdeu {} fichas'.format(aposta))
+                
+                        if pontuacao_mesa1 == pontuacao_player:
+                            if pontuacao_player >= 17:
+                                print('A mesa fez')
+                                print('Empate!')
+                                print('Você ganhou {} fichas'.format(aposta))
+                    
+                    elif pontuacao_mesa1 > 21:
+                        print('{}! Estourou!'.format(pontuacao_mesa1))
+                        print('Você ganhou {} fichas'.format(2*aposta))
+                        fichas += 2*aposta
+                    
+                    if pontuacao_mesa1 < pontuacao_player:
+                        print('A mesa tem {}'.format(pontuacao_mesa1))
+                        
 
     jogar = input('Deseja jogar novamente? [s/n]')
     lista_cartas = ['A','A','A','A','J','J','J','J','K','K','K','K','Q','Q','Q','Q','2','2','2','2','3','3','3','3','4','4','4','4','5','5','5','5','6','6','6','6','7','7','7','7','8','8','8','8','9','9','9','9','10','10','10','10']
