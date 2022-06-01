@@ -20,9 +20,9 @@ altura_ficha =
 ficha = pygame.image.load('').convert()
 ficha_ajustada = pygame.transform.scale(ficha, (, ))
 
+
 largura_carta = pygame.image.load('').convert()
 altura_carta = pygame.image.load('').convert()
-
 a_ouros = pygame.image.load('assets/img/cartas/ace_of_diamonds.png').convert()
 a_espadas = pygame.image.load('assets/img/cartas/ace_of_spades.png').convert() 
 a_paus = pygame.image.load('assets/img/cartas/ace_of_clubs.png').convert()
@@ -102,8 +102,6 @@ class Carta(pygame.sprite.Sprite):
             self.speedy = 0
 
 
-
-
 cartas_player = []
 carta1 = Carta(a_ouros,400,400)
 cartas_player.append(carta1)
@@ -111,11 +109,9 @@ cartas_player.append(carta1)
 game = True
 # Loop principal do jogo
 while game:
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game = False
-
     janela.fill((255,255,255))
     janela.blit(tela_de_fundo_ajustada, (0,0))
 
