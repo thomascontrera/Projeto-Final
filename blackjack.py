@@ -21,7 +21,6 @@ ficha_ajustada = pygame.transform.scale(ficha, (, ))
 
 largura_carta = 
 altura_carta = 
-lista_cartas = []
 a_ouros =
 a_espadas =  
 a_paus = 
@@ -76,6 +75,8 @@ k_paus =
 k_copas = 
 
 # Inicia estruturas de dados
+lista_cartas = []
+dicionario = {}
 game = True
 
 # Loop principal do jogo
