@@ -13,7 +13,7 @@ pygame.display.set_caption('Blackjack')
 # Inicia assets
 tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
-
+a_ouros = pygame.image.load('assets/img/cartas/ace_of_diamonds.png').convert()
 
 largura_ficha = 
 altura_ficha = 
@@ -22,7 +22,7 @@ ficha_ajustada = pygame.transform.scale(ficha, (, ))
 
 largura_carta = pygame.image.load('').convert()
 altura_carta = pygame.image.load('').convert()
-a_ouros = pygame.image.load('').convert()
+
 a_espadas = pygame.image.load('').convert() 
 a_paus = pygame.image.load('').convert()
 a_copas = pygame.image.load('').convert()
@@ -81,14 +81,30 @@ lista_cartas = [a_ouros, a_espadas, a_paus, a_copas, dois_ouros, dois_espadas, d
 dicionario = {dois_ouros: 2, dois_espadas:2, dois_paus:2, dois_copas:2, tres_ouros:3, tres_espadas:3, tres_paus:3, tres_copas:3, quatro_ouros:4, quatro_espadas:4, quatro_paus:4, quatro_copas:4, cinco_ouros:5, cinco_espadas:5, cinco_paus:5, cinco_copas:5, seis_ouros:6, seis_espadas:6, seis_paus:6, seis_copas:6, sete_ouros:7, sete_espadas:7, sete_paus:7, sete_copas:7, oito_ouros:8, oito_espadas:8, oito_paus:8, oito_copas:8, nove_ouros:9, nove_espadas:9, nove_paus:9, nove_copas:9, dez_ouros:10, dez_espadas:10, dez_paus:10, dez_copas:10, j_ouros:10, j_espadas:10, j_paus:10, j_copas:10, q_ouros:10, q_espadas:10, q_paus:10, q_copas:10, k_ouros:10, k_espadas:10, k_paus:10, k_copas:10}
 
 
-class CartaPlayer(pygame.sprite.Sprite):
-    
-class CartaMesa(pygame.sprite.Sprite):
+class Carta(pygame.sprite.Sprite):
+    def __init__(self,img,x,y):
+        pygame.sprite.Sprite.__init__(self)
 
-class Ficha
+        self.image = img
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.speedx = 0
+        self.speedy = 0
 
+    def uptade(self):
 
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
 
+        if self.rect.x == 400 and self.rect.y == 400:
+            self.speedx = 0
+            self.speedy = 0
+
+#carta1 = CartaPlayer(a_ouros)
+cartas_player = []
+carta1 = Carta(a_ouros,400,400)
+cartas_player.append(carta1)
 
 game = True
 # Loop principal do jogo
@@ -98,10 +114,12 @@ while game:
         if event.type == pygame.QUIT:
             game = False
 
-
     janela.fill((255,255,255))
     janela.blit(tela_de_fundo_ajustada, (0,0))
 
+    for carta in cartas_player:
+        janela.blit(carta.image,carta.rect)
+    
     pygame.display.update()
 
 
