@@ -14,15 +14,8 @@ pygame.display.set_caption('Blackjack')
 tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
-
-largura_ficha = 
-altura_ficha = 
-ficha = pygame.image.load('').convert()
-ficha_ajustada = pygame.transform.scale(ficha, (, ))
-
-
-largura_carta = pygame.image.load('').convert()
-altura_carta = pygame.image.load('').convert()
+ 
+carta_back = pygame.image.load('assets/img/cartas/cardback.png').convert()
 a_ouros = pygame.image.load('assets/img/cartas/ace_of_diamonds.png').convert()
 a_espadas = pygame.image.load('assets/img/cartas/ace_of_spades.png').convert() 
 a_paus = pygame.image.load('assets/img/cartas/ace_of_clubs.png').convert()
@@ -101,10 +94,21 @@ class Carta(pygame.sprite.Sprite):
             self.speedx = 0
             self.speedy = 0
 
-
+blackjack_mesa = False
+blackjack_player = False
 cartas_player = []
-carta1 = Carta(a_ouros,400,400)
-cartas_player.append(carta1)
+cartas_mesa = []
+
+
+c1_player = Carta(random.choice(lista_cartas),350,300)
+c1_mesa = Carta(random.choice(lista_cartas),350,100)
+c2_player = Carta(random.choice(lista_cartas),370,300)
+c2_mesa = Carta(random.choice(lista_cartas),370,100)
+
+cartas_player.append(c1_player)
+cartas_player.append(c2_player)
+cartas_mesa.append(c1_mesa)
+cartas_mesa.append(c2_mesa)
 
 game = True
 # Loop principal do jogo
@@ -112,12 +116,17 @@ while game:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game = False
-    janela.fill((255,255,255))
+    
     janela.blit(tela_de_fundo_ajustada, (0,0))
 
     for carta in cartas_player:
         janela.blit(carta.image,carta.rect)
+
+    for carta in cartas_mesa:
+        janela.blit(carta.image,carta.rect)
     
+    
+
     pygame.display.update()
 
 
