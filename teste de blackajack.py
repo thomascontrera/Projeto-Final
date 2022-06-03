@@ -70,8 +70,10 @@ k_espadas = pygame.image.load('assets/img/cartas/jack_of_spades.png').convert()
 k_paus = pygame.image.load('assets/img/cartas/king_of_clubs.png').convert()
 k_copas = pygame.image.load('assets/img/cartas/king_of_hearts.png').convert()
 
+largura_botao = 100
+altura_botao = 60
 botao_comprar = pygame.image.load('assets/img/botao_comprar.png').convert()
-botao_comprar = pygame.transform.scale(botao_comprar, (50, 30))
+botao_comprar = pygame.transform.scale(botao_comprar, (largura_botao, altura_botao))
 
 # Inicia estruturas de dados
 lista_cartas = [a_ouros, a_espadas, a_paus, a_copas, dois_ouros, dois_espadas, dois_paus, dois_copas, tres_ouros, tres_espadas, tres_paus, tres_copas, quatro_ouros, quatro_espadas, quatro_paus, quatro_copas, cinco_ouros, cinco_espadas, cinco_paus, cinco_copas, seis_ouros, seis_espadas, seis_paus, seis_copas, sete_ouros, sete_espadas, sete_paus, sete_copas, oito_ouros, oito_espadas, oito_paus, oito_copas, nove_ouros, nove_espadas, nove_paus, nove_copas, dez_ouros, dez_espadas, dez_paus, dez_copas, j_ouros, j_espadas, j_paus, j_copas, q_ouros, q_espadas, q_paus, q_copas, k_ouros, k_espadas, k_paus, k_copas]
@@ -101,70 +103,55 @@ class Carta(pygame.sprite.Sprite):
 blackjack_mesa = False
 blackjack_player = False
 cartas = []
-
 posicao_player = 370
 posicao_mesa = 370
 
-
 game = True
-jogo_rolando = True
-
-cor = (100,100,100)
-cor_clara = (170,170,170)
-cor_escura = (100,100,100)
-
-
-
+jogo_inicial = True
 
 # Loop principal do jogo
 while game:
 
     for event in pygame.event.get():
+
+        janela.blit(tela_de_fundo_ajustada, (0,0))
+        
         if event.type == pygame.QUIT:
             game = False
-        
-        
-    janela.blit(tela_de_fundo_ajustada, (0,0))
 
+        if jogo_inicial == True:
+            c1_player = Carta(random.choice(lista_cartas),350,300)
+            cartas.append(c1_player)
+
+            c1_mesa = Carta(random.choice(lista_cartas),350,100)
+            cartas.append(c1_mesa)
+
+            c2_player = Carta(random.choice(lista_cartas),370,300)
+            cartas.append(c2_player)
+
+            c2_mesa_escuro = Carta(carta_back,370,100)
+            cartas.append(c2_mesa_escuro)
+
+            jogo_inicial = False
+
+        
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if 600 <= mouse[0] <= 600+largura_botao and 225 <= mouse[1] <= 225+altura_botao:
+                posicao_player += 20
+                extra_carta = Carta(random.choice(lista_cartas),posicao_player,300)
+                cartas.append(extra_carta)
+      
+        
     mouse = pygame.mouse.get_pos()
 
-    if largura/2 <= mouse[0] <= largura/2+140 and altura/2 <= mouse[1] <= altura/2+40:
-        pygame.draw.rect(janela,cor_clara,[largura/2,altura/2,140,40])
-    else:
-        pygame.draw.rect(janela,cor_escura,[largura/2,altura/2,140,40])
-    
-    
-    janela.blit(botao_comprar)
-
-
-    
-    while jogo_rolando:
-        c1_player = Carta(random.choice(lista_cartas),350,300)
-        cartas.append(c1_player)
-
-        c1_mesa = Carta(random.choice(lista_cartas),350,100)
-        cartas.append(c1_mesa)
-
-        jogo_rolando=False
-        
-        
+    janela.blit(botao_comprar, (600,225))
+         
     for carta in cartas:
         janela.blit(carta.image,carta.rect)
 
     for carta in cartas:
         janela.blit(carta.image,carta.rect)
 
-    
-
-    janela.blit(c1_player.image,c1_player.rect)    
-    janela.blit(c1_mesa.image,c1_mesa.rect)
-
-    
-    
-    
-    
-   
-    
 
     pygame.display.update()
 
