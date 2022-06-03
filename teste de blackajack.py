@@ -106,6 +106,8 @@ cartas = []
 posicao_player = 370
 posicao_mesa = 370
 
+pontuacao_player1 = 0 
+pontuacao_player2 = 0
 game = True
 jogo_inicial = True
 
@@ -121,6 +123,13 @@ while game:
 
         if jogo_inicial == True:
             c1_player = Carta(random.choice(lista_cartas),350,300)
+            if c1_player in dicionario.keys():
+                pontuacao_player1 += dicionario[c1_player]
+                pontuacao_player2 += dicionario[c1_player]
+            else:
+                pontuacao_player1 += 1
+                pontuacao_player2 += 11
+
             cartas.append(c1_player)
 
             c1_mesa = Carta(random.choice(lista_cartas),350,100)
@@ -145,7 +154,7 @@ while game:
                 c2_mesa = Carta(random.choice(lista_cartas),370,100)
                 cartas.append(c2_mesa)
                 
-                
+
       
         
     mouse = pygame.mouse.get_pos()
