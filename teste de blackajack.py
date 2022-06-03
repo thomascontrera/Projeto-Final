@@ -136,10 +136,16 @@ while game:
 
         
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if 600 <= mouse[0] <= 600+largura_botao and 225 <= mouse[1] <= 225+altura_botao:
+            if 600 <= mouse[0] <= 600+largura_botao and 225 <= mouse[1] <= 225+altura_botao:  # Clique no botão de comprar
                 posicao_player += 20
                 extra_carta = Carta(random.choice(lista_cartas),posicao_player,300)
                 cartas.append(extra_carta)
+            
+            else: # segurar
+                c2_mesa = Carta(random.choice(lista_cartas),370,100)
+                cartas.append(c2_mesa)
+                
+                
       
         
     mouse = pygame.mouse.get_pos()
