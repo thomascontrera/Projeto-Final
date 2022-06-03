@@ -111,14 +111,28 @@ cartas_mesa.append(c1_mesa)
 cartas_mesa.append(c2_mesa)
 
 game = True
+jogo_rolando = True
+pontuacao = 0
 # Loop principal do jogo
 while game:
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game = False
     
     janela.blit(tela_de_fundo_ajustada, (0,0))
 
+    while jogo_rolando:
+        extra_player = Carta(random.choice(lista_cartas),390,300)
+        cartas_player.append(extra_player)
+        if pontuacao == 21:
+            jogo_rolando = False
+
+        pontuacao += 1
+        
+    
+    
+    
     for carta in cartas_player:
         janela.blit(carta.image,carta.rect)
 
