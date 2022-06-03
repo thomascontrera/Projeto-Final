@@ -127,6 +127,16 @@ while game:
         
     janela.blit(tela_de_fundo_ajustada, (0,0))
 
+    mouse = pygame.mouse.get_pos()
+
+    if largura/2 <= mouse[0] <= largura/2+140 and altura/2 <= mouse[1] <= altura/2+40:
+        pygame.draw.rect(janela,cor_clara,[largura/2,altura/2,140,40])
+    else:
+        pygame.draw.rect(janela,cor_escura,[largura/2,altura/2,140,40])
+    
+    
+    janela.blit(botao_comprar, (largura/2+50, altura/2))
+
 
     
     while jogo_rolando:
