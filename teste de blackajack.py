@@ -209,6 +209,8 @@ while game:
                         pontuacao_player = pontuacao_player2
                     if pontuacao_player1 <= 21 and pontuacao_player2 > 21:
                         pontuacao_player = pontuacao_player1
+                    if pontuacao_player1 > 21:
+                        pontuacao_player = 0 
                     
                     # Sorteia a carta 2 da mesa e adiciona na lista 'cartas'
                     c2_mesa = random.choice(lista_cartas)
