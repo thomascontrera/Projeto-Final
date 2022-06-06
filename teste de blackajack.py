@@ -81,7 +81,7 @@ botao_segurar = pygame.image.load('assets/img/botao_comprar.png').convert()
 botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_botao))    
 
 # Texto
-fonte_placar = pygame.font.Font('assets/BOBCAT.TTF')
+fonte_placar = pygame.font.Font('assets/BOBCAT.TTF',40)
 
 # Lista de cartas e dicionário de pontuação
 lista_cartas = [a_ouros, a_espadas, a_paus, a_copas, dois_ouros, dois_espadas, dois_paus, dois_copas, tres_ouros, tres_espadas, tres_paus, tres_copas, quatro_ouros, quatro_espadas, quatro_paus, quatro_copas, cinco_ouros, cinco_espadas, cinco_paus, cinco_copas, seis_ouros, seis_espadas, seis_paus, seis_copas, sete_ouros, sete_espadas, sete_paus, sete_copas, oito_ouros, oito_espadas, oito_paus, oito_copas, nove_ouros, nove_espadas, nove_paus, nove_copas, dez_ouros, dez_espadas, dez_paus, dez_copas, j_ouros, j_espadas, j_paus, j_copas, q_ouros, q_espadas, q_paus, q_copas, k_ouros, k_espadas, k_paus, k_copas]
@@ -218,7 +218,6 @@ while game:
                             pontuacao_player2 += 1  
                     extra_player = Carta(extra_player,posicao_player,300)
                     cartas.append(extra_player)
-
                     p1.append(pontuacao_player1)
                     p2.append(pontuacao_player2)
 
@@ -326,9 +325,13 @@ while game:
             carta.update()
 
 
-    # Desenha a pontuação da carta
-    #superficie = fonte_placar.render({}.format(pontuacao_player1), True, (255, 255, 0))
+    # Desenha a pontuação do jogador
+    pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player1), True, (255, 255, 0))
+    janela.blit(pontuacaojogador, (275,325))
 
+    # Desenha a pontuação da mesa
+    pontuacaomesa = fonte_placar.render('{}'.format(pontuacao_mesa1), True, (255, 255, 0))
+    janela.blit(pontuacaomesa, (275,125))
 
     pygame.display.update()
 
