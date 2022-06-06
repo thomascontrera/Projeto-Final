@@ -109,15 +109,20 @@ class Carta(pygame.sprite.Sprite):
             self.speedy = 0
 
 # Variáveis iniciais
+
 blackjack_mesa = False
 blackjack_player = False
-cartas = []
+
+cartas = []  # Lista de todas as cartas que saem do baralho
+
 posicao_player = 370
 posicao_mesa = 370
-pontuacao_player1 = 0 
+
+pontuacao_player1 = 0
 pontuacao_player2 = 0
 pontuacao_mesa1 = 0
 pontuacao_mesa2 = 0
+
 game = True
 jogo_inicial = True
 i=0
@@ -132,39 +137,46 @@ while game:
         if event.type == pygame.QUIT:
             game = False
 
-        if jogo_inicial == True:
-
-            c1_player = Carta(random.choice(lista_cartas),350,300) 
+        if jogo_inicial == True:  # Enquanto os primeiros sorteios ocorrem
+            
+            # Sorteia a carta 1 do jogador e adiciona na lista 'cartas'
+            c1_player = random.choice(lista_cartas)
             if c1_player in dicionario.keys():
                 pontuacao_player1 += dicionario[c1_player]  
                 pontuacao_player2 += dicionario[c1_player]
             else:  
                 pontuacao_player1 += 1
                 pontuacao_player2 += 11
+            c1_player = Carta(c1_player,350,300) 
             cartas.append(c1_player)  
 
-            c1_mesa = Carta(random.choice(lista_cartas),350,100)
+            # Sorteia a carta 1 da mesa e adiciona na lista 'cartas'
+            c1_mesa = random.choice(lista_cartas)
             if c1_mesa in dicionario.keys():
                 pontuacao_mesa1 += dicionario[c1_mesa]
                 pontuacao_mesa2 += dicionario[c1_mesa]
             else:
                 pontuacao_mesa1 += 1
                 pontuacao_mesa2 += 11
+            c1_mesa = Carta(c1_mesa,350,100)    
             cartas.append(c1_mesa)
 
-            c2_player = Carta(random.choice(lista_cartas),370,300)
+            # Sorteia a carta 1 do jogador e adiciona na lista 'cartas'
+            c2_player = random.choice(lista_cartas)
             if c2_player in dicionario.keys():
-                pontuacao_player1 += dicionario[c2_player]
+                pontuacao_player1 += dicionario[c2_player]  
                 pontuacao_player2 += dicionario[c2_player]
-            else:
+            else:  
                 pontuacao_player1 += 1
                 pontuacao_player2 += 11
+            c2_player = Carta(c2_player,370,300) 
             cartas.append(c2_player)
 
+            # Adiciona uma carta virada na lista 'cartas'
             c2_mesa_escuro = Carta(carta_back,370,100)  
             cartas.append(c2_mesa_escuro)
 
-            jogo_inicial = False
+            jogo_inicial = False  # Aconteceram os primeiros sorteios
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if i < 1:  # Uma vez que clicou o segurar, não é possível comprar e segurar mais
@@ -173,20 +185,24 @@ while game:
                     extra_carta = Carta(random.choice(lista_cartas),posicao_player,300)
                     cartas.append(extra_carta)
 
-                if 600 <= mouse[0] <= 600+largura_botao and 175 <= mouse[1] <= 175+altura_botao: # Clique no botão de segurar
+                if 600 <= mouse[0] <= 600+largura_botao and 150 <= mouse[1] <= 150+altura_botao: # Clique no botão de segurar
                     i=1  # Impossibilita o comprar/segurar até que jogue novamente
-                    c2_mesa = Carta(random.choice(lista_cartas),370,100)
+
+                    # Sorteia a carta 2 da mesa e adiciona na lista 'cartas'
+                    c2_mesa = random.choice(lista_cartas)
                     if c2_mesa in dicionario.keys():
                         pontuacao_mesa1 += dicionario[c2_mesa]
                         pontuacao_mesa2 += dicionario[c2_mesa]
                     else:
                         pontuacao_mesa1 += 1
                         pontuacao_mesa2 += 11
+                    c2_mesa = Carta(c2_mesa,370,100)    
                     cartas.append(c2_mesa)
 
     mouse = pygame.mouse.get_pos()
 
     janela.blit(botao_comprar, (600,225))
+    janela.blit(botao_comprar, (600,150))
 
     # Desenhando as cartas    
     for carta in cartas:
