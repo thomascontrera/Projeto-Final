@@ -324,9 +324,28 @@ while game:
         else:
             carta.update()
 
-    # Define as pontuações
-    pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player1), True, (255, 255, 0))
-    pontuacaomesa = fonte_placar.render('{}'.format(pontuacao_mesa1), True, (255, 255, 0))
+    # Define as pontuações do jogador
+    if pontuacao_player1 == pontuacao_player2:
+        pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player1), True, (255, 255, 0))
+    else:
+        if pontuacao_player1 <= 21 and pontuacao_player2 > 21:
+            pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player1), True, (255, 255, 0))
+        if pontuacao_player1 <= 21 and pontuacao_player2 <= 21:
+            pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player2), True, (255, 255, 0))
+        if pontuacao_player1 > 21:
+            pontuacaojogador = fonte_placar.render('Estourou!', True, (255, 255, 0))
+        
+    # Define as pontuações da mesa
+    if pontuacao_mesa1 == pontuacao_mesa2:
+        pontuacaomesa = fonte_placar.render('{}'.format(pontuacao_mesa1), True, (255, 255, 0))
+    else:
+        if pontuacao_mesa1 <= 21 and pontuacao_mesa2 > 21:
+            pontuacaomesa = fonte_placar.render('{}'.format(pontuacao_mesa1), True, (255, 255, 0))
+        if pontuacao_mesa1 <= 21 and pontuacao_mesa2 <= 21:
+            pontuacaomesa = fonte_placar.render('{}'.format(pontuacao_mesa2), True, (255, 255, 0))
+        if pontuacao_mesa1 > 21:
+            pontuacaomesa = fonte_placar.render('Estourou!', True, (255, 255, 0))
+
 
     # Desenha as pontuações
     janela.blit(pontuacaomesa, (275,125))
