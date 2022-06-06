@@ -296,7 +296,7 @@ while jogar == 's':
                         pontuacao_mesa1 += 1
                         pontuacao_mesa2 += 1
                     elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
-                        pontuacao_mesa1 += 11
+                        pontuacao_mesa1 += 1
                         pontuacao_mesa2 += 1
 
                 if extra_mesa != 'A':
@@ -363,7 +363,7 @@ while jogar == 's':
                             pontuacao_mesa1 += 1
                             pontuacao_mesa2 += 1
                         elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
-                            pontuacao_mesa1 += 11
+                            pontuacao_mesa1 += 1
                             pontuacao_mesa2 += 1
 
                     if extra_mesa != 'A':

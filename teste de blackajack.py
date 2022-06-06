@@ -114,6 +114,7 @@ blackjack_mesa = False
 blackjack_player = False
 
 cartas = []  # Lista de todas as cartas que saem do baralho
+pontuacao = []
 
 posicao_player = 370
 posicao_mesa = 370
@@ -180,14 +181,35 @@ while game:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if i < 1:  # Uma vez que clicou o segurar, não é possível comprar e segurar mais
-                if 600 <= mouse[0] <= 600+largura_botao and 225 <= mouse[1] <= 225+altura_botao:  # Clique no botão de comprar
+                if 600 <= mouse[0] <= 600+largura_botao and 250 <= mouse[1] <= 250+altura_botao:  # Clique no botão de comprar
                     posicao_player += 20
-                    extra_carta = Carta(random.choice(lista_cartas),posicao_player,300)
-                    cartas.append(extra_carta)
+                    extra_player = random.choice(lista_cartas)
+                    if extra_player in dicionario.keys():
+                        pontuacao_player1 += dicionario[extra_player]  
+                        pontuacao_player2 += dicionario[extra_player]
+                    else:
+                        if pontuacao_player1 <= 10 and pontuacao_player2 <= 10:
+                            pontuacao_player1 += 1
+                            pontuacao_player2 += 11
+                        elif pontuacao_player1 > 10 and pontuacao_player2 > 10:
+                            pontuacao_player1 += 1
+                            pontuacao_player2 += 1
+                        elif pontuacao_player1 <= 10 and pontuacao_player2 > 10:
+                            pontuacao_player1 += 1
+                            pontuacao_player2 += 1  
+                    extra_player = Carta(extra_player,posicao_player,300)
+                    cartas.append(extra_player)
 
-                if 600 <= mouse[0] <= 600+largura_botao and 150 <= mouse[1] <= 150+altura_botao: # Clique no botão de segurar
+
+                if 600 <= mouse[0] <= 600+largura_botao and 175 <= mouse[1] <= 175+altura_botao: # Clique no botão de segurar
                     i=1  # Impossibilita o comprar/segurar até que jogue novamente
 
+                    # Define a pontuação do jogador após clicar em segurar
+                    if pontuacao_player1 <= 21 and pontuacao_player2 <= 21:
+                        pontuacao_player = pontuacao_player2
+                    if pontuacao_player1 <= 21 and pontuacao_player2 > 21:
+                        pontuacao_player = pontuacao_player1
+                    
                     # Sorteia a carta 2 da mesa e adiciona na lista 'cartas'
                     c2_mesa = random.choice(lista_cartas)
                     if c2_mesa in dicionario.keys():
@@ -199,17 +221,75 @@ while game:
                     c2_mesa = Carta(c2_mesa,370,100)    
                     cartas.append(c2_mesa)
 
+                    if pontuacao_player == pontuacao_mesa2:  # Se está empatado
+                        if pontuacao_player < 17:
+                            posicao_mesa += 20
+                            extra_mesa = random.choice(lista_cartas)  # Sorteia carta extra da mesa se a pontuação for menor que 17 
+                            if extra_mesa in dicionario.keys():
+                                pontuacao_mesa1 += dicionario[extra_mesa]  
+                                pontuacao_mesa2 += dicionario[extra_mesa]
+                            else:
+                                if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
+                                    pontuacao_mesa1 += 1
+                                    pontuacao_mesa2 += 11
+                                elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
+                                    pontuacao_mesa1 += 1
+                                    pontuacao_mesa2 += 1
+                                elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
+                                    pontuacao_mesa1 += 1
+                                    pontuacao_mesa2 += 1
+                            extra_mesa = Carta(extra_mesa,posicao_mesa,100)
+                            cartas.append(extra_mesa)
+
+                    while pontuacao_player > pontuacao_mesa2:
+                        posicao_mesa += 20
+                        extra_mesa = random.choice(lista_cartas)
+                        if extra_mesa in dicionario.keys():
+                            pontuacao_mesa1 += dicionario[extra_mesa]  
+                            pontuacao_mesa2 += dicionario[extra_mesa]
+                        else:
+                            if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
+                                    pontuacao_mesa1 += 1
+                                    pontuacao_mesa2 += 11
+                            elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
+                                pontuacao_mesa1 += 1
+                                pontuacao_mesa2 += 1
+                            elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
+                                pontuacao_mesa1 += 1
+                                pontuacao_mesa2 += 1  
+                        extra_mesa = Carta(extra_mesa,posicao_mesa,100)
+                        cartas.append(extra_mesa)
+
+                    while pontuacao_player > pontuacao_mesa1 and pontuacao_mesa2 > pontuacao_player:
+                        if pontuacao_mesa2 > 21:
+                            posicao_mesa += 20
+                            extra_mesa = random.choice(lista_cartas)
+                            if extra_mesa in dicionario.keys():
+                                pontuacao_mesa1 += dicionario[extra_mesa]  
+                                pontuacao_mesa2 += dicionario[extra_mesa]
+                            else:
+                                if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
+                                    pontuacao_mesa1 += 1
+                                    pontuacao_mesa2 += 11
+                                elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
+                                    pontuacao_mesa1 += 1
+                                    pontuacao_mesa2 += 1
+                                elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
+                                    pontuacao_mesa1 += 1
+                                    pontuacao_mesa2 += 1  
+                            extra_mesa = Carta(extra_mesa,posicao_mesa,100)
+                            cartas.append(extra_mesa)
+    
     mouse = pygame.mouse.get_pos()
 
-    janela.blit(botao_comprar, (600,225))
-    janela.blit(botao_comprar, (600,150))
+    janela.blit(botao_comprar, (600,250))
+    janela.blit(botao_comprar, (600,175))
 
-    # Desenhando as cartas    
+    # Desenha todas as cartas adicionadas na lista 'carta' com um delay   
     for carta in cartas:
         janela.blit(carta.image,carta.rect)
 
-
-    # Desenhando pontuação
+    # Desenha a pontuação da carta
     #superficie = fonte_placar.render({}.format(pontuacao_player1), True, (255, 255, 0))
 
 
