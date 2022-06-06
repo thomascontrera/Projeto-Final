@@ -2,6 +2,7 @@
 import pygame
 import random
 import sys
+import time
 
 pygame.init()
 
@@ -80,7 +81,7 @@ botao_segurar = pygame.image.load('assets/img/botao_comprar.png').convert()
 botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_botao))    
 
 # Texto
-#fonte_placar = pygame.font.Font()
+fonte_placar = pygame.font.Font()
 
 # Lista de cartas e dicionário de pontuação
 lista_cartas = [a_ouros, a_espadas, a_paus, a_copas, dois_ouros, dois_espadas, dois_paus, dois_copas, tres_ouros, tres_espadas, tres_paus, tres_copas, quatro_ouros, quatro_espadas, quatro_paus, quatro_copas, cinco_ouros, cinco_espadas, cinco_paus, cinco_copas, seis_ouros, seis_espadas, seis_paus, seis_copas, sete_ouros, sete_espadas, sete_paus, sete_copas, oito_ouros, oito_espadas, oito_paus, oito_copas, nove_ouros, nove_espadas, nove_paus, nove_copas, dez_ouros, dez_espadas, dez_paus, dez_copas, j_ouros, j_espadas, j_paus, j_copas, q_ouros, q_espadas, q_paus, q_copas, k_ouros, k_espadas, k_paus, k_copas]
@@ -89,7 +90,7 @@ dicionario = {dois_ouros: 2, dois_espadas:2, dois_paus:2, dois_copas:2, tres_our
 
 # Classe de carta
 class Carta(pygame.sprite.Sprite):
-    def __init__(self,img,x,y):
+    def __init__(self,img,x,y,delay=1):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
@@ -98,9 +99,15 @@ class Carta(pygame.sprite.Sprite):
         self.rect.y = y
         self.speedx = 0
         self.speedy = 0
+        self.delay = delay
+        self.tempocriacao = time.time()
+        self.exibir = False
 
-    def uptade(self):
-
+    def update(self):
+        
+        t = time.time()
+        if t - self.tempocriacao > self.delay:
+            self.exibir = True
         self.rect.x += self.speedx
         self.rect.y += self.speedy
 
@@ -133,11 +140,10 @@ i=0
 
 # Loop principal do jogo
 while game:
-
+    janela.blit(tela_de_fundo_ajustada, (0,0))
+    
     for event in pygame.event.get():
 
-        janela.blit(tela_de_fundo_ajustada, (0,0))
-        
         if event.type == pygame.QUIT:
             game = False
 
@@ -152,8 +158,8 @@ while game:
                 pontuacao_player1 += 1
                 pontuacao_player2 += 11
 
-              
-            c1_player = Carta(c1_player,350,300) 
+  
+            c1_player = Carta(c1_player,350,300,1) 
             cartas.append(c1_player)  
 
             # Sorteia a carta 1 da mesa e adiciona na lista 'cartas'
@@ -164,7 +170,7 @@ while game:
             else:
                 pontuacao_mesa1 += 1
                 pontuacao_mesa2 += 11
-            c1_mesa = Carta(c1_mesa,350,100)    
+            c1_mesa = Carta(c1_mesa,350,100,2)    
             cartas.append(c1_mesa)
 
             # Sorteia a carta 1 do jogador e adiciona na lista 'cartas'
@@ -175,11 +181,11 @@ while game:
             else:  
                 pontuacao_player1 += 1
                 pontuacao_player2 += 11
-            c2_player = Carta(c2_player,370,300) 
+            c2_player = Carta(c2_player,370,300,3) 
             cartas.append(c2_player)
 
             # Adiciona uma carta virada na lista 'cartas'
-            c2_mesa_escuro = Carta(carta_back,370,100)  
+            c2_mesa_escuro = Carta(carta_back,370,100,4)  
             cartas.append(c2_mesa_escuro)
 
             jogo_inicial = False  # Aconteceram os primeiros sorteios
@@ -295,7 +301,11 @@ while game:
 
     # Desenha todas as cartas adicionadas na lista 'carta' com um delay   
     for carta in cartas:
-        janela.blit(carta.image,carta.rect)
+        if carta.exibir:
+            janela.blit(carta.image,carta.rect)
+        else:
+            carta.update()
+
 
     # Desenha a pontuação da carta
     #superficie = fonte_placar.render({}.format(pontuacao_player1), True, (255, 255, 0))
