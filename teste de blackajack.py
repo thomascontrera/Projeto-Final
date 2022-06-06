@@ -136,6 +136,7 @@ pontuacao_mesa2 = 0
 
 game = True
 jogo_inicial = True
+jogada_player = True
 i=0
 
 # Loop principal do jogo
@@ -222,8 +223,11 @@ while game:
                     p2.append(pontuacao_player2)
 
                 if 600 <= mouse[0] <= 600+largura_botao and 175 <= mouse[1] <= 175+altura_botao: # Clique no botão de segurar
-                    i=1  # Impossibilita o comprar/segurar até que jogue novamente
-
+                    
+                    # Impossibilita o comprar/segurar até que jogue novamente
+                    i=1
+                    jogada_player = False
+                    
                     # Define a pontuação do jogador após clicar em segurar
                     if pontuacao_player1 <= 21 and pontuacao_player2 <= 21:
                         pontuacao_player = pontuacao_player2
@@ -311,13 +315,14 @@ while game:
                             m1.append(pontuacao_mesa1)
                             m2.append(pontuacao_mesa2)
 
-
     mouse = pygame.mouse.get_pos()
 
-    janela.blit(botao_comprar, (600,250))
-    janela.blit(botao_comprar, (600,175))
+    # Desenha os botões 'comprar' e 'segurar' enquanto o player puder escolher alguma dessas opções
+    if jogada_player == True:
+        janela.blit(botao_comprar, (600,250))
+        janela.blit(botao_comprar, (600,175))
 
-    # Desenha todas as cartas adicionadas na lista 'carta' com um delay   
+    # Desenha todas as cartas adicionadas na lista 'carta' com um delay de 1s   
     for carta in cartas:
         if carta.exibir:
             janela.blit(carta.image,carta.rect)
