@@ -324,15 +324,13 @@ while game:
         else:
             carta.update()
 
-
-    # Desenha a pontuação do jogador
+    # Define as pontuações
     pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player1), True, (255, 255, 0))
-    janela.blit(pontuacaojogador, (275,325))
-
-    # Desenha a pontuação da mesa
     pontuacaomesa = fonte_placar.render('{}'.format(pontuacao_mesa1), True, (255, 255, 0))
-    janela.blit(pontuacaomesa, (275,125))
 
+    # Desenha as pontuações
+    janela.blit(pontuacaomesa, (275,125))
+    janela.blit(pontuacaojogador, (275,325))
     pygame.display.update()
 
 
