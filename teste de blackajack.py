@@ -151,6 +151,8 @@ while game:
             else:  
                 pontuacao_player1 += 1
                 pontuacao_player2 += 11
+
+              
             c1_player = Carta(c1_player,350,300) 
             cartas.append(c1_player)  
 
