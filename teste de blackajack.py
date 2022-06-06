@@ -114,7 +114,10 @@ blackjack_mesa = False
 blackjack_player = False
 
 cartas = []  # Lista de todas as cartas que saem do baralho
-pontuacao = []
+p1 = []  # Lista que armazena a pontuação 1 do jogador a cada carta que sai do baralho
+p2 = []  # Lista que armazena a pontuação 2 do jogador a cada carta que sai do baralho
+m1 = []  # Lista que armazena a pontuação 1 da mesa a cada carta que sai do baralho
+m2 = []  # Lista que armazena a pontuação 2 da mesa a cada carta que sai do baralho
 
 posicao_player = 370
 posicao_mesa = 370
@@ -240,6 +243,7 @@ while game:
                                 elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
                                     pontuacao_mesa1 += 1
                                     pontuacao_mesa2 += 1
+
                             extra_mesa = Carta(extra_mesa,posicao_mesa,100)
                             cartas.append(extra_mesa)
 
@@ -251,8 +255,8 @@ while game:
                             pontuacao_mesa2 += dicionario[extra_mesa]
                         else:
                             if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
-                                    pontuacao_mesa1 += 1
-                                    pontuacao_mesa2 += 11
+                                pontuacao_mesa1 += 1
+                                pontuacao_mesa2 += 11
                             elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
                                 pontuacao_mesa1 += 1
                                 pontuacao_mesa2 += 1
@@ -300,5 +304,3 @@ while game:
 
 pygame.quit()
 
-print(pontuacao_player1)
-print(pontuacao_mesa1)
