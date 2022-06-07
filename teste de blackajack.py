@@ -15,14 +15,14 @@ pygame.display.set_caption('Blackjack')
 # Inicia assets
 
 # Imagens
-tela_de_fundo = pygame.image.load('assets/img/mesa.png').convert()
+tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
 tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
 tampa_placar_ajustado = pygame.transform.scale(tampa_placar, (125, 50))
 
-carta_back = pygame.image.load('assets/img/cartas/verso.png').convert()
-carta_back_ajustada = pygame.transform.scale(carta_back, (75, 110))
+carta_back = pygame.image.load('assets/img/cartas/cardback.png').convert()
+#carta_back_ajustada = pygame.transform.scale(carta_back, (75, 110))
 
 a_ouros = pygame.image.load('assets/img/cartas/ace_of_diamonds.png').convert()
 a_espadas = pygame.image.load('assets/img/cartas/ace_of_spades.png').convert() 
@@ -252,7 +252,7 @@ while game:
             cartas.append(c2_player)
            
             # Adiciona uma carta virada na lista 'cartas'
-            c2_mesa_escuro = Carta(carta_back_ajustada,370,100,1.2)  
+            c2_mesa_escuro = Carta(carta_back,370,100,1.2)  
             cartas.append(c2_mesa_escuro)
 
             jogo_inicial = False  # Aconteceram os primeiros sorteios
