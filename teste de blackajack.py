@@ -18,6 +18,9 @@ pygame.display.set_caption('Blackjack')
 tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
+tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
+tampa_placar_ajustado = pygame.transform.scale(tampa_placar, (125, 50))
+
 carta_back = pygame.image.load('assets/img/cartas/cardback.png').convert()
 a_ouros = pygame.image.load('assets/img/cartas/ace_of_diamonds.png').convert()
 a_espadas = pygame.image.load('assets/img/cartas/ace_of_spades.png').convert() 
@@ -440,7 +443,6 @@ while game:
         # Verifica se estourou
         if pontuacao_player1 > 21 or pontuacao_mesa1 > 21:
             print('Estourou!')
-            #delay
 
         # Verifica se ganhou/perdeu
         if pontuacao_mesa > pontuacao_player:
@@ -454,15 +456,16 @@ while game:
     # Desenha a pontuação do jogador para cada virada de carta
     for pontuacao in pp:
         if pontuacao.exibir:
+            janela.blit(tampa_placar_ajustado, (200,325))  
             janela.blit(pontuacao.text,pontuacao.rect)
         else:
             pontuacao.update()
     for pontuacao in pm:
-        if pontuacao.exibir: 
+        if pontuacao.exibir:
+            janela.blit(tampa_placar_ajustado, (200,125))
             janela.blit(pontuacao.text,pontuacao.rect)
         else:
             pontuacao.update()
-
 
     # Desenha todas as cartas adicionadas na lista 'cartas' com um delay de   
     for carta in cartas:
