@@ -15,13 +15,15 @@ pygame.display.set_caption('Blackjack')
 # Inicia assets
 
 # Imagens
-tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').convert()
+tela_de_fundo = pygame.image.load('assets/img/mesa.png').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
 tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
 tampa_placar_ajustado = pygame.transform.scale(tampa_placar, (125, 50))
 
-carta_back = pygame.image.load('assets/img/cartas/cardback.png').convert()
+carta_back = pygame.image.load('assets/img/cartas/verso.png').convert()
+carta_back_ajustada = pygame.transform.scale(carta_back, (75, 110))
+
 a_ouros = pygame.image.load('assets/img/cartas/ace_of_diamonds.png').convert()
 a_espadas = pygame.image.load('assets/img/cartas/ace_of_spades.png').convert() 
 a_paus = pygame.image.load('assets/img/cartas/ace_of_clubs.png').convert()
@@ -84,6 +86,9 @@ botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_bot
 
 # Texto
 fonte_placar = pygame.font.Font('assets/BOBCAT.TTF',40)
+
+# Cor
+branco = (250,250,250)
 
 # Lista de cartas e dicionário de pontuação
 lista_cartas = [a_ouros, a_espadas, a_paus, a_copas, dois_ouros, dois_espadas, dois_paus, dois_copas, tres_ouros, tres_espadas, tres_paus, tres_copas, quatro_ouros, quatro_espadas, quatro_paus, quatro_copas, cinco_ouros, cinco_espadas, cinco_paus, cinco_copas, seis_ouros, seis_espadas, seis_paus, seis_copas, sete_ouros, sete_espadas, sete_paus, sete_copas, oito_ouros, oito_espadas, oito_paus, oito_copas, nove_ouros, nove_espadas, nove_paus, nove_copas, dez_ouros, dez_espadas, dez_paus, dez_copas, j_ouros, j_espadas, j_paus, j_copas, q_ouros, q_espadas, q_paus, q_copas, k_ouros, k_espadas, k_paus, k_copas]
@@ -193,10 +198,10 @@ while game:
                 pontuacao_player2 += 11
 
             if pontuacao_player1 == pontuacao_player2:
-                pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, (255, 255, 0))
+                pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, branco)
                 pontuacaojogador = Placar(pontuacaojogador,275,325,0.3)
             else:
-                pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, (255, 255, 0))
+                pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, branco)
                 pontuacaojogador = Placar(pontuacaojogador,200,325,0.3)
 
             pp.append(pontuacaojogador)
@@ -214,10 +219,10 @@ while game:
                 pontuacao_mesa2 += 11
             
             if pontuacao_mesa1 == pontuacao_mesa2:
-                pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, (255, 255, 0))
+                pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
                 pontuacaomesa = Placar(pontuacaomesa,275,125,0.6)
             else:
-                pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, (255, 255, 0))
+                pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
                 pontuacaomesa = Placar(pontuacaomesa,200,125,0.6)
 
             pm.append(pontuacaomesa)
@@ -235,10 +240,10 @@ while game:
                 pontuacao_player2 += 11
             
             if pontuacao_player1 == pontuacao_player2:
-                pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, (255, 255, 0))
+                pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, branco)
                 pontuacaojogador = Placar(pontuacaojogador,275,325,0.9)
             else:
-                pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, (255, 255, 0))
+                pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, branco)
                 pontuacaojogador = Placar(pontuacaojogador,200,325,0.9)
 
             pp.append(pontuacaojogador)
@@ -247,7 +252,7 @@ while game:
             cartas.append(c2_player)
            
             # Adiciona uma carta virada na lista 'cartas'
-            c2_mesa_escuro = Carta(carta_back,370,100,1.2)  
+            c2_mesa_escuro = Carta(carta_back_ajustada,370,100,1.2)  
             cartas.append(c2_mesa_escuro)
 
             jogo_inicial = False  # Aconteceram os primeiros sorteios
@@ -273,15 +278,15 @@ while game:
                             pontuacao_player2 += 1  
 
                     if pontuacao_player1 == pontuacao_player2:
-                        pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, (255, 255, 0))
+                        pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, branco)
                         pontuacaojogador = Placar(pontuacaojogador,275,325,delay)
                     else:
                         if pontuacao_player2 <= 21 and pontuacao_player1 <= 21:
-                            pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, (255, 255, 0))
+                            pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, branco)
                             pontuacaojogador = Placar(pontuacaojogador,200,325,delay)
                         elif pontuacao_player1 <= 21 and pontuacao_player2 > 21:
-                            pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player1), True, (255, 255, 0))
-                            pontuacaojogador = Placar(pontuacaojogador,200,325,delay)
+                            pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player1), True, branco)
+                            pontuacaojogador = Placar(pontuacaojogador,275,325,delay)
 
                     pp.append(pontuacaojogador)
 
@@ -318,10 +323,10 @@ while game:
                         pontuacao_mesa2 += 11
 
                     if pontuacao_mesa1 == pontuacao_mesa2:
-                        pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, (255, 255, 0))
+                        pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
                         pontuacaomesa = Placar(pontuacaomesa,275,125,delay)
                     else:
-                        pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, (255, 255, 0))
+                        pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
                         pontuacaomesa = Placar(pontuacaomesa,200,125,delay)
 
                     pm.append(pontuacaomesa)
@@ -351,10 +356,10 @@ while game:
                                     pontuacao_mesa2 += 1
 
                             if pontuacao_mesa1 == pontuacao_mesa2:
-                                pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, (255, 255, 0))
+                                pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
                                 pontuacaomesa = Placar(pontuacaomesa,275,125,delay)
                             else:
-                                pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, (255, 255, 0))
+                                pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
                                 pontuacaomesa = Placar(pontuacaomesa,200,125,delay)
 
                             pm.append(pontuacaomesa)
@@ -382,10 +387,10 @@ while game:
                                 pontuacao_mesa2 += 1  
 
                         if pontuacao_mesa1 == pontuacao_mesa2:
-                                pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, (255, 255, 0))
+                                pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
                                 pontuacaomesa = Placar(pontuacaomesa,275,125,delay)
                         else:
-                            pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, (255, 255, 0))
+                            pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
                             pontuacaomesa = Placar(pontuacaomesa,200,125,delay)
 
                         pm.append(pontuacaomesa)
@@ -414,10 +419,10 @@ while game:
                                     pontuacao_mesa2 += 1  
                             
                             if pontuacao_mesa1 == pontuacao_mesa2:
-                                pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, (255, 255, 0))
+                                pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
                                 pontuacaomesa = Placar(pontuacaomesa,275,125,delay)
                             else:
-                                pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, (255, 255, 0))
+                                pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
                                 pontuacaomesa = Placar(pontuacaomesa,200,125,delay)
 
                             pm.append(pontuacaomesa)
