@@ -162,6 +162,7 @@ delay = 0
 game = True
 jogo_inicial = True
 jogada_player = True
+jogo_fim = False
 i=0
 
 # Loop principal do jogo
@@ -275,8 +276,9 @@ while game:
                     cartas.append(c2_mesa)
                     m1.append(pontuacao_mesa1)
                     m2.append(pontuacao_mesa2)
-
-                    if pontuacao_player == pontuacao_mesa2:  # Se está empatado
+                    
+                    # Define situação de empate
+                    if pontuacao_player == pontuacao_mesa2:  
                         if pontuacao_player < 17:
                             delay += 0.6
                             posicao_mesa += 20
@@ -301,6 +303,7 @@ while game:
                             m1.append(pontuacao_mesa1)
                             m2.append(pontuacao_mesa2)
 
+                    # Define situação que o jogador está com mais pontos que a mesa
                     while pontuacao_player > pontuacao_mesa2:
                         posicao_mesa += 20
                         delay += 0.6
@@ -323,6 +326,7 @@ while game:
                         m1.append(pontuacao_mesa1)
                         m2.append(pontuacao_mesa2)
 
+                    # Define situação que o jogador tem mais pontos que a mesa
                     while pontuacao_player > pontuacao_mesa1 and pontuacao_mesa2 > pontuacao_player:
                         if pontuacao_mesa2 > 21:
                             delay += 0.6
@@ -345,21 +349,13 @@ while game:
                             cartas.append(extra_mesa)
                             m1.append(pontuacao_mesa1)
                             m2.append(pontuacao_mesa2)
-
+                    
     mouse = pygame.mouse.get_pos()
 
     # Desenha os botões 'comprar' e 'segurar' enquanto o player puder escolher alguma dessas opções
     if jogada_player == True:
         janela.blit(botao_comprar, (600,250))
         janela.blit(botao_comprar, (600,175))
-
-    # Desenha todas as cartas adicionadas na lista 'carta' com um delay de   
-    for carta in cartas:
-        if carta.exibir:
-            janela.blit(carta.image,carta.rect)
-        else:
-            carta.update()
-
 
     # Define as pontuações do jogador
     if pontuacao_player1 == pontuacao_player2:
@@ -399,13 +395,17 @@ while game:
             pontuacaomesa = fonte_placar.render('Estourou!', True, (255, 255, 0))
             mesax = 200
 
+    # Desenha todas as cartas adicionadas na lista 'carta' com um delay de   
+    for carta in cartas:
+        if carta.exibir:
+            janela.blit(carta.image,carta.rect)
+            janela.blit(pontuacaomesa, (mesax,125))
+            janela.blit(pontuacaojogador, (jogx,325))
 
-    
+        else:
+            carta.update()
 
 
-    # Desenha as pontuações
-    janela.blit(pontuacaomesa, (mesax,125))
-    janela.blit(pontuacaojogador, (jogx,325))
     pygame.display.update()
 
 
