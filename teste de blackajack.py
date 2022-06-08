@@ -15,11 +15,8 @@ pygame.display.set_caption('Blackjack')
 # Inicia assets
 
 # Imagens
-<<<<<<< HEAD
 tela_de_fundo = pygame.image.load('assets/img/mesa.jpg').convert()
-=======
 tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').convert()
->>>>>>> 8780edd7c3d41bb4c3e7fab974952838943a7838
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
 tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
@@ -83,9 +80,9 @@ k_copas = pygame.image.load('assets/img/cartas/king_of_hearts.png').convert()
 
 largura_botao = 100
 altura_botao = 60
-botao_comprar = pygame.image.load('assets/img/botao_comprar.png').convert()
+botao_comprar = pygame.image.load('assets/img/botao_buy.png').convert()
 botao_comprar = pygame.transform.scale(botao_comprar, (largura_botao, altura_botao))
-botao_segurar = pygame.image.load('assets/img/botao_comprar.png').convert()
+botao_segurar = pygame.image.load('assets/img/botao_stand.png').convert()
 botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_botao))    
 
 # Texto
@@ -182,12 +179,8 @@ blackjack_mesa = False
 blackjack_player = False
 
 cartas = []  # Lista que armazena todas as cartas que saem do baralho
-p1 = []  # Lista que armazena a pontuação 1 do jogador a cada carta que sai do baralho
-p2 = []  # Lista que armazena a pontuação 2 do jogador a cada carta que sai do baralho
-m1 = []  # Lista que armazena a pontuação 1 da mesa a cada carta que sai do baralho
-m2 = []  # Lista que armazena a pontuação 2 da mesa a cada carta que sai do baralho
-pp = []
-pm = []
+pp = []  # Lista que armazena a pontuação do jogador a cada carta que sai do baralho
+pm = []  # Lista que armazena a pontuação da mesa a cada carta que sai do baralho
 
 
 posicao_player = 370
@@ -480,9 +473,9 @@ while game:
         # Verifica se estourou
         if pontuacao_player1 > 21 or pontuacao_mesa1 > 21:
             print('Estourou!')
-            Animação  = True
-            animação = fonte_animação.render(str("ESTOROU"), True, branco)
-            animação = Animações(animação,275,125,0.6)
+            #Animação  = True
+            #animação = fonte_animação.render(str("ESTOROU"), True, branco)
+            #animação = Animações(animação,275,125,0.6)
             
             
 
@@ -519,12 +512,12 @@ while game:
     # Desenha os botões 'comprar' e 'segurar' enquanto o player puder escolher alguma dessas opções
     if jogada_player == True:
         janela.blit(botao_comprar, (600,250))
-        janela.blit(botao_comprar, (600,175))
+        janela.blit(botao_segurar, (600,175))
 
-    if Animação == True:    
-        janela.blit(animação, (400,300))
-        janela.blit(animação.text,animação.rect)
-        animação.update()
+    #if Animação == True:    
+        #janela.blit(animação, (400,300))
+        #janela.blit(animação.text,animação.rect)
+        #animação.update()
     
 
 
