@@ -83,7 +83,14 @@ altura_botao = 60
 botao_comprar = pygame.image.load('assets/img/botao_buy.png').convert()
 botao_comprar = pygame.transform.scale(botao_comprar, (largura_botao, altura_botao))
 botao_segurar = pygame.image.load('assets/img/botao_stand.png').convert()
-botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_botao))    
+botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_botao))
+
+pericles_neutro =  pygame.image.load('assets/img/pericles.jpg').convert()
+pericles_neutro = pygame.transform.scale(pericles_neutro, (largura, altura))
+pericles_feliz = 
+pericles_feliz = 
+pericles_triste = 
+pericles_triste = 
 
 # Texto
 fonte_placar = pygame.font.Font('assets/BOBCAT.TTF',40)
@@ -154,8 +161,7 @@ while jogo_rolando:
             self.rect.x += self.speedx
             self.rect.y += self.speedy
 
-    # Classe de 'estourou!'
-    #Classe de animações
+    # Classe de animações
     class Animações(pygame.sprite.Sprite):
         def __init__(self,txt,x,y,delay=0.6):
             pygame.sprite.Sprite.__init__(self)
@@ -462,7 +468,7 @@ while jogo_rolando:
                                 extra_mesa = Carta(extra_mesa,posicao_mesa,100,delay)
                                 cartas.append(extra_mesa)
 
-                        # As pontuações finais são definidas  
+                        # Os resultados finais são definidas
                         jogo_fim = True
                         
                     # Define a pontuação final da mesa
@@ -473,6 +479,9 @@ while jogo_rolando:
                     elif pontuacao_mesa1 > 21:
                         pontuacao_mesa = 0
 
+                    delay+=1.5
+                    resultado = Carta(pericles, 0, 0, delay)
+                    
         mouse = pygame.mouse.get_pos()
 
         janela.blit(tela_de_fundo_ajustada, (0,0))
@@ -501,24 +510,38 @@ while jogo_rolando:
         if jogada_player == True:
             janela.blit(botao_comprar, (600,250))
             janela.blit(botao_segurar, (600,175))
+
             
         #if Animação == True:    
             #janela.blit(animação, (400,300))
             #janela.blit(animação.text,animação.rect)
             #animação.update()
+        #delay += 0.6  
+            #Verifica se ganhou/perdeu
+            #if pontuacao_mesa > pontuacao_player:
+                #perdeu = True
+            #elif pontuacao_mesa == pontuacao_player:
+                #empate = True
+            #else:
+                #ganhou = True
 
         if jogo_fim == True:
-            janela.blit(botao_comprar, (100,100))
+
+            if resultado.exibir:
+                janela.blit(resultado.image, resultado.rect)
+            else:
+                resultado.update()
+
+
             # Verifica se estourou
-            if pontuacao_player1 > 21 or pontuacao_mesa1 > 21:
-                delay += 0.5
-                print('Estourou!')
+            #if pontuacao_player1 > 21 or pontuacao_mesa1 > 21:
+                #delay += 0.5
+                #print('Estourou!')
                 #Animação  = True
                 #animação = fonte_animação.render(str("ESTOROU"), True, branco)
                 #animação = Animações(animação,275,125,0.6)
-
-            delay += 0.5  
-            # Verifica se ganhou/perdeu
+ 
+            #Verifica se ganhou/perdeu
             if pontuacao_mesa > pontuacao_player:
                 perdeu = True
             elif pontuacao_mesa == pontuacao_player:
@@ -526,7 +549,8 @@ while jogo_rolando:
             else:
                 ganhou = True
 
-    
+
+
         pygame.display.update()
 
 pygame.quit()
