@@ -15,7 +15,7 @@ pygame.display.set_caption('Blackjack')
 # Inicia assets
 
 # Imagens
-tela_de_fundo = pygame.image.load('assets/img/mesa.png').convert()
+tela_de_fundo = pygame.image.load('assets/img/mesa.jpg').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
 tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
@@ -86,6 +86,7 @@ botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_bot
 
 # Texto
 fonte_placar = pygame.font.Font('assets/BOBCAT.TTF',40)
+fonte_animação = pygame.font.Font('assets/BOBCAT.TTF',100)
 
 # Cor
 branco = (250,250,250)
@@ -145,7 +146,31 @@ class Placar(pygame.sprite.Sprite):
         self.rect.y += self.speedy
 
 # Classe de 'estourou!'
+#Classe de animações
+class Animações(pygame.sprite.Sprite):
+    def __init__(self,txt,x,y,delay=0.6):
+        pygame.sprite.Sprite.__init__(self)
 
+        self.text = txt
+        self.rect = self.text.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.speedx = 10
+        self.speedy = 0
+        self.delay = delay
+        self.tempocriacao = time.time()
+        self.exibir = False
+
+    def update(self):
+        
+        t = time.time()
+        if t - self.tempocriacao > self.delay:
+            self.exibir = True
+
+        if self.react.x == 800 or self.react.x == 0:
+            self.rect.x += self.speedx * -1
+        
+        self.rect.y += self.speedy
 
 # Variáveis iniciais
 
@@ -159,6 +184,7 @@ m1 = []  # Lista que armazena a pontuação 1 da mesa a cada carta que sai do ba
 m2 = []  # Lista que armazena a pontuação 2 da mesa a cada carta que sai do baralho
 pp = []
 pm = []
+
 
 posicao_player = 370
 posicao_mesa = 370
@@ -176,6 +202,7 @@ jogada_player = True
 jogo_fim = False
 i=0
 p=0
+Animação = False
 
 # Loop principal do jogo
 while game:
@@ -297,7 +324,8 @@ while game:
                         jogada_player = False
                         jogo_fim = True
                         i=1
-                
+                        
+
                 # Define a pontuação do jogador após terminar de comprar
                 if pontuacao_player1 <= 21 and pontuacao_player2 <= 21:
                     pontuacao_player = pontuacao_player2
@@ -448,6 +476,11 @@ while game:
         # Verifica se estourou
         if pontuacao_player1 > 21 or pontuacao_mesa1 > 21:
             print('Estourou!')
+            Animação  = True
+            animação = fonte_animação.render(str("ESTOROU"), True, branco)
+            animação = Animações(animação,275,125,0.6)
+            
+            
 
         # Verifica se ganhou/perdeu
         if pontuacao_mesa > pontuacao_player:
@@ -483,6 +516,14 @@ while game:
     if jogada_player == True:
         janela.blit(botao_comprar, (600,250))
         janela.blit(botao_comprar, (600,175))
+
+    if Animação == True:    
+        janela.blit(animação, (400,300))
+        janela.blit(animação.text,animação.rect)
+        animação.update()
+    
+
+
 
     pygame.display.update()
 
