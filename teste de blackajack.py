@@ -475,42 +475,40 @@ while jogo_rolando:
 
         mouse = pygame.mouse.get_pos()
 
-        if jogo_fim == False:
+        janela.blit(tela_de_fundo_ajustada, (0,0))
+        # Desenha a pontuação do jogador para cada virada de carta
+        for pontuacao in pp:
+            if pontuacao.exibir:
+                janela.blit(tampa_placar_ajustado, (200,325))  
+                janela.blit(pontuacao.text,pontuacao.rect)
+            else:
+                pontuacao.update()
+        for pontuacao in pm:
+            if pontuacao.exibir:
+                janela.blit(tampa_placar_ajustado, (200,125))
+                janela.blit(pontuacao.text,pontuacao.rect)
+            else:
+                pontuacao.update()
 
-            janela.blit(tela_de_fundo_ajustada, (0,0))
-            # Desenha a pontuação do jogador para cada virada de carta
-            for pontuacao in pp:
-                if pontuacao.exibir:
-                    janela.blit(tampa_placar_ajustado, (200,325))  
-                    janela.blit(pontuacao.text,pontuacao.rect)
-                else:
-                    pontuacao.update()
-            for pontuacao in pm:
-                if pontuacao.exibir:
-                    janela.blit(tampa_placar_ajustado, (200,125))
-                    janela.blit(pontuacao.text,pontuacao.rect)
-                else:
-                    pontuacao.update()
+        # Desenha todas as cartas adicionadas na lista 'cartas' com um delay de   
+        for carta in cartas:
+            if carta.exibir:
+                janela.blit(carta.image,carta.rect)
+            else:
+                carta.update()
 
-            # Desenha todas as cartas adicionadas na lista 'cartas' com um delay de   
-            for carta in cartas:
-                if carta.exibir:
-                    janela.blit(carta.image,carta.rect)
-                else:
-                    carta.update()
-
-            # Desenha os botões 'comprar' e 'segurar' enquanto o player puder escolher alguma dessas opções
-            if jogada_player == True:
-                janela.blit(botao_comprar, (600,250))
-                janela.blit(botao_segurar, (600,175))
+        # Desenha os botões 'comprar' e 'segurar' enquanto o player puder escolher alguma dessas opções
+        if jogada_player == True:
+            janela.blit(botao_comprar, (600,250))
+            janela.blit(botao_segurar, (600,175))
             
-            #if Animação == True:    
-                #janela.blit(animação, (400,300))
-                #janela.blit(animação.text,animação.rect)
-                #animação.update()
+        #if Animação == True:    
+            #janela.blit(animação, (400,300))
+            #janela.blit(animação.text,animação.rect)
+            #animação.update()
 
         if jogo_fim == True:
-            #janela.fill((0,0,0))
+            janela.blit(botao_comprar, (100,100))
             # Verifica se estourou
             if pontuacao_player1 > 21 or pontuacao_mesa1 > 21:
                 delay += 0.5
@@ -529,7 +527,6 @@ while jogo_rolando:
                 ganhou = True
 
     
-        
         pygame.display.update()
 
 pygame.quit()
