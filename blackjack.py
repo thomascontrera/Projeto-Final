@@ -396,77 +396,84 @@ while jogo_rolando:
 
                         c2_mesa = Carta(c2_mesa,370,100,delay)    
                         cartas.append(c2_mesa)
+                                              
                         
-                        
-                        # Define situação de empate
-                        if pontuacao_player == pontuacao_mesa2:  
-                            if pontuacao_player < 17:
-                                delay += 0.6
-                                posicao_mesa += 20
-                                extra_mesa = random.choice(lista_cartas)  # Sorteia carta extra da mesa se a pontuação for menor que 17 
-                                if extra_mesa in dicionario.keys():
-                                    pontuacao_mesa1 += dicionario[extra_mesa]  
-                                    pontuacao_mesa2 += dicionario[extra_mesa]
+                        while jogo_fim == False:
+
+                            # Quando a pontuação maior da mesa está empatada com a pontuação do jogador
+                            if pontuacao_player == pontuacao_mesa2:  
+                                if pontuacao_player < 17:
+                                    delay += 0.6
+                                    posicao_mesa += 20
+                                    extra_mesa = random.choice(lista_cartas)  # Sorteia carta extra da mesa se a pontuação for menor que 17 
+                                    if extra_mesa in dicionario.keys():
+                                        pontuacao_mesa1 += dicionario[extra_mesa]  
+                                        pontuacao_mesa2 += dicionario[extra_mesa]
+                                    else:
+                                        if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 11
+                                        elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 1
+                                        elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 1
+
+                                    if pontuacao_mesa1 == pontuacao_mesa2:
+                                        pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
+                                        pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
+                                    else:
+                                        pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
+                                        pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
+
+                                    pm.append(pontuacaomesa)
+
+                                    extra_mesa = Carta(extra_mesa,posicao_mesa,100,delay)
+                                    cartas.append(extra_mesa)
                                 else:
-                                    if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
-                                        pontuacao_mesa1 += 1
-                                        pontuacao_mesa2 += 11
-                                    elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
-                                        pontuacao_mesa1 += 1
-                                        pontuacao_mesa2 += 1
-                                    elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
-                                        pontuacao_mesa1 += 1
-                                        pontuacao_mesa2 += 1
+                                    jogo_fim = True
 
-                                if pontuacao_mesa1 == pontuacao_mesa2:
-                                    pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
+                            #Quando a pontuação menor da mesa está empatada com a pontuação do jogador e a maior já passou de 21
+                            elif pontuacao_mesa1 == pontuacao_player and pontuacao_mesa2 > 21:
+                                if pontuacao_player < 17:
+                                    delay += 0.6
+                                    posicao_mesa += 20
+                                    extra_mesa = random.choice(lista_cartas)  # Sorteia carta extra da mesa se a pontuação for menor que 17 
+                                    if extra_mesa in dicionario.keys():
+                                        pontuacao_mesa1 += dicionario[extra_mesa]  
+                                        pontuacao_mesa2 += dicionario[extra_mesa]
+                                    else:
+                                        if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 11
+                                        elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 1
+                                        elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 1
+
+                                    if pontuacao_mesa1 == pontuacao_mesa2:
+                                        pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
+                                        pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
+                                    else:
+                                        pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
+                                        pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
+
+                                    pm.append(pontuacaomesa)
+
+                                    extra_mesa = Carta(extra_mesa,posicao_mesa,100,delay)
+                                    cartas.append(extra_mesa)
+                                
                                 else:
-                                    pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
-
-                                pm.append(pontuacaomesa)
-
-                                extra_mesa = Carta(extra_mesa,posicao_mesa,100,delay)
-                                cartas.append(extra_mesa)
-
-                        # Define situação que o jogador está com mais pontos que a mesa
-                        while pontuacao_player >= pontuacao_mesa2:
-                            posicao_mesa += 20
-                            delay += 0.6
-                            extra_mesa = random.choice(lista_cartas)
-                            if extra_mesa in dicionario.keys():
-                                pontuacao_mesa1 += dicionario[extra_mesa]  
-                                pontuacao_mesa2 += dicionario[extra_mesa]
-                            else:
-                                if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
-                                    pontuacao_mesa1 += 1
-                                    pontuacao_mesa2 += 11
-                                elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
-                                    pontuacao_mesa1 += 1
-                                    pontuacao_mesa2 += 1
-                                elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
-                                    pontuacao_mesa1 += 1
-                                    pontuacao_mesa2 += 1  
+                                    jogo_fim = True
 
 
-                            if pontuacao_mesa1 == pontuacao_mesa2:
-                                    pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
-                            else:
-                                pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
-                                pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
-
-                            pm.append(pontuacaomesa)
-                            
-                            extra_mesa = Carta(extra_mesa,posicao_mesa,100,delay)
-                            cartas.append(extra_mesa)
-            
-                        # Define situação que o jogador tem mais pontos que a mesa
-                        while pontuacao_player > pontuacao_mesa1 and pontuacao_mesa2 > pontuacao_player:
-                            if pontuacao_mesa2 > 21:
-                                delay += 0.6
+                            # Quando o jogador tem mais pontos que a maior pontuação da mesa
+                            elif pontuacao_player > pontuacao_mesa2:
                                 posicao_mesa += 20
+                                delay += 0.6
                                 extra_mesa = random.choice(lista_cartas)
                                 if extra_mesa in dicionario.keys():
                                     pontuacao_mesa1 += dicionario[extra_mesa]  
@@ -481,10 +488,10 @@ while jogo_rolando:
                                     elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
                                         pontuacao_mesa1 += 1
                                         pontuacao_mesa2 += 1  
-                                
+
                                 if pontuacao_mesa1 == pontuacao_mesa2:
-                                    pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
+                                        pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
+                                        pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
                                 else:
                                     pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
                                     pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
@@ -493,11 +500,48 @@ while jogo_rolando:
                                 
                                 extra_mesa = Carta(extra_mesa,posicao_mesa,100,delay)
                                 cartas.append(extra_mesa)
+                
+                            # Quando o jogador tem mais pontos que a menor pontuação da mesa e a maior já passou de 21
+                            elif pontuacao_player > pontuacao_mesa1 and pontuacao_mesa2 > pontuacao_player:
+                                if pontuacao_mesa2 > 21:
+                                    delay += 0.6
+                                    posicao_mesa += 20
+                                    extra_mesa = random.choice(lista_cartas)
+                                    if extra_mesa in dicionario.keys():
+                                        pontuacao_mesa1 += dicionario[extra_mesa]  
+                                        pontuacao_mesa2 += dicionario[extra_mesa]
+                                    else:
+                                        if pontuacao_mesa1 <= 10 and pontuacao_mesa2 <= 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 11
+                                        elif pontuacao_mesa1 > 10 and pontuacao_mesa2 > 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 1
+                                        elif pontuacao_mesa1 <= 10 and pontuacao_mesa2 > 10:
+                                            pontuacao_mesa1 += 1
+                                            pontuacao_mesa2 += 1  
+                                    
+                                    if pontuacao_mesa1 == pontuacao_mesa2:
+                                        pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
+                                        pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
+                                    else:
+                                        pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
+                                        pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
+
+                                    pm.append(pontuacaomesa)
+                                    
+                                    extra_mesa = Carta(extra_mesa,posicao_mesa,100,delay)
+                                    cartas.append(extra_mesa)
+                            
+                            # A partida chega ao fim
+                            if pontuacao_mesa2 > pontuacao_player and pontuacao_mesa2 <= 21:
+                                jogo_fim = True
+                            if pontuacao_player1 > pontuacao_mesa1 and pontuacao_mesa1 <= 21:
+                                jogo_fim = True
+                            if pontuacao_mesa1 > 21:
+                                jogo_fim = True
 
 
-                        # Os resultados finais são definidas
-                        jogo_fim = True
-                        
                     # Define a pontuação final da mesa
                     if pontuacao_mesa1 <= 21 and pontuacao_mesa2 <= 21:
                         pontuacao_mesa = pontuacao_mesa2
