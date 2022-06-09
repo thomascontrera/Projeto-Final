@@ -106,6 +106,7 @@ verde = (0,250,0)
 preto = (0,0,0)
 
 # Fontes
+fonte_mini = pygame.font.Font('assets/font/radiant-beauty-regular.ttf',60)
 fonte_pequena = pygame.font.Font('assets/font/radiant-beauty-regular.ttf',60)
 fonte_placar = pygame.font.Font('assets/font/BOBCAT.TTF',40)
 fonte = pygame.font.Font('assets/font/Raphtalia Personal Use.ttf',50)
@@ -126,7 +127,7 @@ uhul = pygame.mixer.Sound('assets/áudio/Uhul _Zé_Roberto (online-audio-convert
 mary = pygame.mixer.Sound('assets/áudio/Água_coca_latao (online-audio-converter.com).mp3')
 rapaiz = pygame.mixer.Sound('assets/áudio/Rapaz _Xaropinho (online-audio-converter.com).mp3')
 
-musica_menu = True
+
 
 # Lista de cartas e dicionário de pontuação
 lista_cartas = [a_ouros, a_espadas, a_paus, a_copas, dois_ouros, dois_espadas, dois_paus, dois_copas, tres_ouros, tres_espadas, tres_paus, tres_copas, quatro_ouros, quatro_espadas, quatro_paus, quatro_copas, cinco_ouros, cinco_espadas, cinco_paus, cinco_copas, seis_ouros, seis_espadas, seis_paus, seis_copas, sete_ouros, sete_espadas, sete_paus, sete_copas, oito_ouros, oito_espadas, oito_paus, oito_copas, nove_ouros, nove_espadas, nove_paus, nove_copas, dez_ouros, dez_espadas, dez_paus, dez_copas, j_ouros, j_espadas, j_paus, j_copas, q_ouros, q_espadas, q_paus, q_copas, k_ouros, k_espadas, k_paus, k_copas]
@@ -448,6 +449,7 @@ while jogo_rolando:
                                     pontuacao_mesa1 += 1
                                     pontuacao_mesa2 += 1  
 
+
                             if pontuacao_mesa1 == pontuacao_mesa2:
                                     pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
                                     pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
@@ -492,6 +494,7 @@ while jogo_rolando:
                                 extra_mesa = Carta(extra_mesa,posicao_mesa,100,delay)
                                 cartas.append(extra_mesa)
 
+
                         # Os resultados finais são definidas
                         jogo_fim = True
                         
@@ -515,30 +518,58 @@ while jogo_rolando:
                     delay = delay + 1.7
                     
                     # Verifica e define texto para os resultados 
+
                     if pontuacao_mesa > pontuacao_player:  # Derrota
-                        resultado = fonte_placar.render('Perdeu!', True, vermelho)
+                        resultado = fonte_pequena.render('Perdeu!', True, vermelho)
                         resultado = Placar(resultado, 0, 0, delay)
                         pericles = Carta(pericles_triste, 0, 0, delay)
                         derrota = True
+
+                        # Define texto de jogar novamente
+                        jogar = fonte_pequena.render('pressione qualquer', True, branco)
+                        tecla = fonte_pequena.render('tecla para', True, branco)
+                        novamente = fonte_pequena.render('jogar novamente', True, branco)
+                        jogar = Placar(jogar, 10, 90, delay)
+                        tecla = Placar(tecla, 30, 130, delay)
+                        novamente = Placar(novamente, 10, 170, delay)
                         
                     elif pontuacao_mesa == pontuacao_player:  # Empate
-                        resultado = fonte_placar.render('Empate!', True, branco)
+                        resultado = fonte_pequena.render('Empate!', True, preto)
                         resultado = Placar(resultado, 0, 0, delay)
                         pericles = Carta(pericles_neutro, 0, 0, delay)
                         empate = True
+
+                        # Define texto de jogar novamente
+                        jogar = fonte_pequena.render('pressione qualquer', True, preto)
+                        tecla = fonte_pequena.render('tecla para', True, preto)
+                        novamente = fonte_pequena.render('jogar novamente', True, preto)
+                        jogar = Placar(jogar, 550, 50, delay)
+                        tecla = Placar(tecla, 560, 90, delay)
+                        novamente = Placar(novamente, 540, 130, delay)
+
                         
                     else:  # Vitória
-                        resultado = fonte_placar.render('Ganhou!', True, verde)
+                        resultado = fonte_pequena.render('Ganhou!', True, verde)
                         resultado = Placar(resultado, 0, 0, delay)
                         pericles = Carta(pericles_feliz, 0, 0, delay)
                         vitoria = True
+
+                        # Define texto de jogar novamente
+                        jogar = fonte_pequena.render('pressione qualquer', True, branco)
+                        tecla = fonte_pequena.render('tecla para', True, branco)
+                        novamente = fonte_pequena.render('jogar novamente', True, branco)
+                        jogar = Placar(jogar, 550, 50, delay)
+                        tecla = Placar(tecla, 560, 90, delay)
+                        novamente = Placar(novamente, 540, 130, delay)
+
+
+
                         
                     
                     # Define texto de 'jogar novamente'
-                    jogar = fonte_placar.render('PRESSIONE QUALQUER TECLA', True, preto)
-                    novamente = fonte_placar.render('PARA JOGAR NOVAMENTE', True, preto)
-                    jogar = Placar(jogar, 180, 0, delay)
-                    novamente = Placar(novamente, 200, 50, delay)
+                    
+                    
+                    
 
             if event.type == pygame.KEYUP and jogo_fim == True:  # Clique para jogar novamente
 
@@ -629,6 +660,11 @@ while jogo_rolando:
                 janela.blit(jogar.text, jogar.rect)
             else:
                 jogar.update()
+
+            if tecla.exibir:
+                janela.blit(tecla.text, tecla.rect)
+            else:
+                tecla.update()
 
             if novamente.exibir:
                 janela.blit(novamente.text, novamente.rect)
