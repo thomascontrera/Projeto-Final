@@ -272,7 +272,7 @@ while jogo_rolando:
                 if i < 1:  # Uma vez que clicou o segurar, não é possível comprar e segurar mais
                     if 600 <= mouse[0] <= 600+largura_botao and 250 <= mouse[1] <= 250+altura_botao:  # Clique no botão de comprar
                         posicao_player += 20
-                        delay += 0.4
+                        delay = 0.4
                         extra_player = random.choice(lista_cartas)
                         if extra_player in dicionario.keys():
                             pontuacao_player1 += dicionario[extra_player]  
@@ -309,7 +309,6 @@ while jogo_rolando:
                             jogo_fim = True
                             i=1
                             
-
                     # Define a pontuação do jogador após terminar de comprar
                     if pontuacao_player1 <= 21 and pontuacao_player2 <= 21:
                         pontuacao_player = pontuacao_player2
@@ -325,7 +324,7 @@ while jogo_rolando:
                         jogada_player = False
                         
                         # Sorteia a carta 2 da mesa e adiciona na lista 'cartas'
-                        delay += 0.3
+                        delay = 0.3
                         c2_mesa = random.choice(lista_cartas)
                         if c2_mesa in dicionario.keys():
                             pontuacao_mesa1 += dicionario[c2_mesa]
@@ -454,20 +453,21 @@ while jogo_rolando:
                         pontuacao_mesa = 0
 
                     # Verifica e define texto para estouros
-                    if pontuacao_mesa1 > 21:
-                        estourou = True
-                        delay += 2
-                        estourou = fonte_placar.render('Estourou!', True, vermelho)
-                        estourou = Placar(estourou, 250, 325, delay)
-
+                
                     if pontuacao_player1 > 21:
                         estouro = True
-                        delay += 2
+                        delay += 0.5
                         estourou = fonte_placar.render('Estourou!', True, vermelho)
                         estourou = Placar(estourou, 250, 125, delay)
 
+                    elif pontuacao_mesa1 > 21:
+                        estourou = True
+                        delay += 0.5
+                        estourou = fonte_placar.render('Estourou!', True, vermelho)
+                        estourou = Placar(estourou, 250, 325, delay)
+
                     # Define delay para aparecer resultado
-                        delay += 5
+                    delay += 2
                     
                     # Verifica e define texto para os resultados 
                     if pontuacao_mesa > pontuacao_player:  # Derrota
