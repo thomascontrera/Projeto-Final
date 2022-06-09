@@ -183,6 +183,7 @@ while jogo_rolando:
     jogo_inicial = True
     jogada_player = True
     jogo_fim = False
+    estouro = False
 
     i=0
     
@@ -452,21 +453,23 @@ while jogo_rolando:
                     elif pontuacao_mesa1 > 21:
                         pontuacao_mesa = 0
 
-                    # Define delay para aparecer resultado
-                    delay += 1
-                    
-                    # Verifica se estourou!
+                    # Verifica e define texto para estouros
                     if pontuacao_mesa1 > 21:
-                        delay += 0.4
+                        estourou = True
+                        delay += 2
                         estourou = fonte_placar.render('Estourou!', True, vermelho)
                         estourou = Placar(estourou, 250, 325, delay)
 
                     if pontuacao_player1 > 21:
-                        delay += 0.4
+                        estouro = True
+                        delay += 2
                         estourou = fonte_placar.render('Estourou!', True, vermelho)
                         estourou = Placar(estourou, 250, 125, delay)
 
-                    # Verifica os resultados 
+                    # Define delay para aparecer resultado
+                        delay += 5
+                    
+                    # Verifica e define texto para os resultados 
                     if pontuacao_mesa > pontuacao_player:  # Derrota
                         resultado = fonte_placar.render('Perdeu!', True, vermelho)
                         resultado = Placar(resultado, 0, 0, delay)
@@ -483,14 +486,14 @@ while jogo_rolando:
                         pericles = Carta(pericles_neutro, 0, 0, delay)
                         vitoria = True
                     
-
                     # Define texto de 'jogar novamente'
                     jogar = fonte_placar.render('PRESSIONE QUALQUER TECLA', True, branco)
                     novamente = fonte_placar.render('PARA JOGAR NOVAMENTE', True, branco)
                     jogar = Placar(jogar, 180, 0, delay)
                     novamente = Placar(novamente, 200, 50, delay)
 
-            if event.type == pygame.KEYUP and jogo_fim == True:
+            if event.type == pygame.KEYUP and jogo_fim == True:  # Clique para jogar novamente
+
                 cartas = []  # Lista que armazena todas as cartas que saem do baralho
                 pp = []  # Lista que armazena a pontuação do jogador a cada carta que sai do baralho
                 pm = []  # Lista que armazena a pontuação da mesa a cada carta que sai do baralho
@@ -508,6 +511,7 @@ while jogo_rolando:
                 jogo_inicial = True
                 jogada_player = True
                 jogo_fim = False
+                estouro = False
                 
                 i=0
 
@@ -544,6 +548,13 @@ while jogo_rolando:
         # Quando as possíveis interações do usuário terminam
         if jogo_fim == True:
 
+            # Exibe 'estourou!' quando estoura
+            if estouro == True:
+                if estourou.exibir:
+                    janela.blit(estourou.text, estourou.rect)
+                else:
+                    estourou.update()
+            
             # Exibe nova tela de fundo
             if pericles.exibir:
                 janela.blit(pericles.image, pericles.rect)
