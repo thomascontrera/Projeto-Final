@@ -112,21 +112,14 @@ jogar = fonte_pequena.render('para jogar', True, preto)
 clique = fonte_pequena.render('clique no', True, preto)
 pericao = fonte_pequena.render('pericão', True, preto)
 
-# Som
-"""
-largarofreio = 
-uhul = 
-mary = 
-rapaiz = 
-"""
-#Carrega os sons do jogo
-pygame.mixer.music.load('assets/áudio/Se_eu_largar_o_freio (online-audio-converter.com).mp3')
-pygame.mixer.music.set_volume(0.4)
+# Sons
+largarofreio = pygame.mixer.Sound('assets/áudio/Se_eu_largar_o_freio (online-audio-converter.com).mp3')
+'''
 uhul = pygame.mixer.Sound('assets/áudio/Uhul_Zé_Roberto.m4a')
 mary = pygame.mixer.Sound('assets/áudio/Água_coca_latao.m4a')
 rapaiz = pygame.mixer.Sound('assets/áudio/Rapaz_Xaropinho.m4a')
-
-pygame.mixer.music.play(loops=-1)
+'''
+musica_menu = True
 
 # Lista de cartas e dicionário de pontuação
 lista_cartas = [a_ouros, a_espadas, a_paus, a_copas, dois_ouros, dois_espadas, dois_paus, dois_copas, tres_ouros, tres_espadas, tres_paus, tres_copas, quatro_ouros, quatro_espadas, quatro_paus, quatro_copas, cinco_ouros, cinco_espadas, cinco_paus, cinco_copas, seis_ouros, seis_espadas, seis_paus, seis_copas, sete_ouros, sete_espadas, sete_paus, sete_copas, oito_ouros, oito_espadas, oito_paus, oito_copas, nove_ouros, nove_espadas, nove_paus, nove_copas, dez_ouros, dez_espadas, dez_paus, dez_copas, j_ouros, j_espadas, j_paus, j_copas, q_ouros, q_espadas, q_paus, q_copas, k_ouros, k_espadas, k_paus, k_copas]
@@ -135,7 +128,7 @@ dicionario = {dois_ouros: 2, dois_espadas:2, dois_paus:2, dois_copas:2, tres_our
 game = False
 jogo_rolando = True
 while jogo_rolando:
-
+    largarofreio.play()
     # Completa a janela com branco
     janela.fill((250,250,250))
 
@@ -161,6 +154,7 @@ while jogo_rolando:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if 250 <= mouse[0] <= 550 and 30 <= mouse[1] <= 500:
                 game = True
+                largarofreio.stop()
 
     # Classe de carta
     class Carta(pygame.sprite.Sprite):
@@ -604,6 +598,7 @@ while jogo_rolando:
             # Exibe o resultado
             if resultado.exibir:
                 janela.blit(resultado.text, resultado.rect)
+                uhul.play()
             else:
                 resultado.update()
 
