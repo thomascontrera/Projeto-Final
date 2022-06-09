@@ -89,15 +89,28 @@ botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_bot
 pericles_neutro =  pygame.image.load('assets/img/pericles.jpg').convert()
 pericles_neutro = pygame.transform.scale(pericles_neutro, (largura, altura))
 pericles_inicio = pygame.image.load('assets/img/pericles_inicio.jpg').convert()
- 
-# Texto
-fonte_placar = pygame.font.Font('assets/BOBCAT.TTF',40)
-fonte_animação = pygame.font.Font('assets/BOBCAT.TTF',100)
+pericles_inicio = pygame.transform.scale(pericles_inicio, (500,500))
 
 # Cor
 branco = (250,250,250)
 vermelho = (250, 0, 0)
 verde = (0,250,0)
+preto = (0,0,0)
+
+# Fontes
+fonte_pequena = pygame.font.Font('assets/font/radiant-beauty-regular.ttf',60)
+fonte_placar = pygame.font.Font('assets/font/BOBCAT.TTF',40)
+fonte = pygame.font.Font('assets/font/Raphtalia Personal Use.ttf',50)
+
+# Textos
+bem_vindo = fonte.render('Bem Vindo ao', True, preto)
+
+blackjack = fonte.render('BLACKJACK', True, vermelho)
+perao = fonte.render('DO PERÃO', True, vermelho)
+
+jogar = fonte_pequena.render('para jogar', True, preto)
+clique = fonte_pequena.render('clique no', True, preto)
+pericao = fonte_pequena.render('pericão', True, preto)
 
 # Som
 """
@@ -115,14 +128,30 @@ game = False
 jogo_rolando = True
 while jogo_rolando:
 
+    # Completa a janela com branco
+    janela.fill((250,250,250))
+
+    # Desenha a imagem do Péricles
+    janela.blit(pericles_inicio, (150,0))
+
+    # Escreve os textos da tela inicial
+    janela.blit(bem_vindo, (25,80))
+
+    janela.blit(blackjack, (30,140))
+    janela.blit(perao, (40,190))
+
+    janela.blit(jogar, (600,180))
+    janela.blit(clique, (600,220))
+    janela.blit(pericao, (600,260))
+
+    # Inicializa mouse
     mouse = pygame.mouse.get_pos()
-    
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             jogo_rolando = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if 600 <= mouse[0] <= 600+largura_botao and 250 <= mouse[1] <= 250+altura_botao:
+            if 250 <= mouse[0] <= 550 and 30 <= mouse[1] <= 500:
                 game = True
 
     # Classe de carta
@@ -583,6 +612,8 @@ while jogo_rolando:
                 novamente.update()
 
         pygame.display.update()
+    
+    pygame.display.update()
 
 pygame.quit()
 
