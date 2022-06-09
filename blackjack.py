@@ -5,6 +5,7 @@ import sys
 import time
 
 pygame.init()
+pygame.mixer.init()
 
 # Gera a tela principal
 largura = 800
@@ -118,6 +119,14 @@ uhul =
 mary = 
 rapaiz = 
 """
+#Carrega os sons do jogo
+pygame.mixer.music.load('assets/áudio/Se_eu_largar_o_freio (online-audio-converter.com).mp3')
+pygame.mixer.music.set_volume(0.4)
+uhul = pygame.mixer.Sound('assets/áudio/Uhul_Zé_Roberto.m4a')
+mary = pygame.mixer.Sound('assets/áudio/Água_coca_latao.m4a')
+rapaiz = pygame.mixer.Sound('assets/áudio/Rapaz_Xaropinho.m4a')
+
+pygame.mixer.music.play(loops=-1)
 
 # Lista de cartas e dicionário de pontuação
 lista_cartas = [a_ouros, a_espadas, a_paus, a_copas, dois_ouros, dois_espadas, dois_paus, dois_copas, tres_ouros, tres_espadas, tres_paus, tres_copas, quatro_ouros, quatro_espadas, quatro_paus, quatro_copas, cinco_ouros, cinco_espadas, cinco_paus, cinco_copas, seis_ouros, seis_espadas, seis_paus, seis_copas, sete_ouros, sete_espadas, sete_paus, sete_copas, oito_ouros, oito_espadas, oito_paus, oito_copas, nove_ouros, nove_espadas, nove_paus, nove_copas, dez_ouros, dez_espadas, dez_paus, dez_copas, j_ouros, j_espadas, j_paus, j_copas, q_ouros, q_espadas, q_paus, q_copas, k_ouros, k_espadas, k_paus, k_copas]
