@@ -454,20 +454,14 @@ while jogo_rolando:
 
                     # Verifica e define texto para estouros
                 
-                    if pontuacao_player1 > 21:
+                    if pontuacao_player1 > 21 or pontuacao_mesa1 > 21:
                         estouro = True
-                        delay += 0.5
+                        delay = 1
                         estourou = fonte_placar.render('Estourou!', True, vermelho)
-                        estourou = Placar(estourou, 250, 125, delay)
-
-                    elif pontuacao_mesa1 > 21:
-                        estourou = True
-                        delay += 0.5
-                        estourou = fonte_placar.render('Estourou!', True, vermelho)
-                        estourou = Placar(estourou, 250, 325, delay)
+                        estourou = Placar(estourou, 350, 225, delay)
 
                     # Define delay para aparecer resultado
-                    delay += 2
+                    delay = 2
                     
                     # Verifica e define texto para os resultados 
                     if pontuacao_mesa > pontuacao_player:  # Derrota
