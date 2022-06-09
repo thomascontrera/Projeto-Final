@@ -20,11 +20,11 @@ tela_de_fundo = pygame.image.load('assets/img/mesa.jpg').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
 tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
-tampa_placar_ajustado = pygame.transform.scale(tampa_placar, (140, 50))
+tampa_placar = pygame.transform.scale(tampa_placar, (140, 50))
+tampa_placar_cima = pygame.image.load('assets/img/tampa_placar_cima.jpg').convert()
+tampa_placar_cima = pygame.transform.scale(tampa_placar_cima, (140, 50))
 
 carta_back = pygame.image.load('assets/img/cartas/cardback.png').convert()
-
-
 a_ouros = pygame.image.load('assets/img/cartas/ace_of_diamonds.png').convert()
 a_espadas = pygame.image.load('assets/img/cartas/ace_of_spades.png').convert() 
 a_paus = pygame.image.load('assets/img/cartas/ace_of_clubs.png').convert()
@@ -556,13 +556,13 @@ while jogo_rolando:
         # Desenha a pontuação do jogador para cada virada de carta
         for pontuacao in pp:
             if pontuacao.exibir:
-                janela.blit(tampa_placar_ajustado, (500,325))  
+                janela.blit(tampa_placar, (500,325))  
                 janela.blit(pontuacao.text,pontuacao.rect)
             else:
                 pontuacao.update()
         for pontuacao in pm:
             if pontuacao.exibir:
-                janela.blit(tampa_placar_ajustado, (500,100))
+                janela.blit(tampa_placar_cima, (500,100))
                 janela.blit(pontuacao.text,pontuacao.rect)
             else:
                 pontuacao.update()
