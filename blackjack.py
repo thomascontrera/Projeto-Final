@@ -20,9 +20,9 @@ tela_de_fundo = pygame.image.load('assets/img/mesa.jpg').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
 tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
-tampa_placar = pygame.transform.scale(tampa_placar, (140, 50))
+tampa_placar = pygame.transform.scale(tampa_placar, (150, 50))
 tampa_placar_cima = pygame.image.load('assets/img/tampa_placar_cima.jpg').convert()
-tampa_placar_cima = pygame.transform.scale(tampa_placar_cima, (140, 50))
+tampa_placar_cima = pygame.transform.scale(tampa_placar_cima, (150, 50))
 
 carta_back = pygame.image.load('assets/img/cartas/cardback.png').convert()
 a_ouros = pygame.image.load('assets/img/cartas/ace_of_diamonds.png').convert()
@@ -80,16 +80,24 @@ k_copas = pygame.image.load('assets/img/cartas/king_of_hearts.png').convert()
 
 largura_botao = 100
 altura_botao = 60
-botao_comprar = pygame.image.load('assets/img/botao_buy.png').convert()
+botao_comprar = pygame.image.load('assets/img/botao_comprar.jpg').convert()
 botao_comprar = pygame.transform.scale(botao_comprar, (largura_botao, altura_botao))
-botao_segurar = pygame.image.load('assets/img/botao_stand.png').convert()
+botao_segurar = pygame.image.load('assets/img/botao_segurar.jpg').convert()
 botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_botao))
 
 
-pericles_neutro =  pygame.image.load('assets/img/pericles.jpg').convert()
+pericles_neutro = pygame.image.load('assets/img/pericles_empate.jpg').convert()
 pericles_neutro = pygame.transform.scale(pericles_neutro, (largura, altura))
+
 pericles_inicio = pygame.image.load('assets/img/pericles_inicio.jpg').convert()
 pericles_inicio = pygame.transform.scale(pericles_inicio, (500,500))
+
+pericles_triste = pygame.image.load('assets/img/pericles_triste.jpeg').convert()
+pericles_triste = pygame.transform.scale(pericles_triste, (largura, altura))
+
+pericles_feliz = pygame.image.load('assets/img/pericles_vitoria.jpg').convert()
+pericles_feliz = pygame.transform.scale(pericles_feliz, (largura,altura))
+
 
 # Cor
 branco = (250,250,250)
@@ -114,11 +122,10 @@ pericao = fonte_pequena.render('pericão', True, preto)
 
 # Sons
 largarofreio = pygame.mixer.Sound('assets/áudio/Se_eu_largar_o_freio (online-audio-converter.com).mp3')
-'''
-uhul = pygame.mixer.Sound('assets/áudio/Uhul_Zé_Roberto.m4a')
-mary = pygame.mixer.Sound('assets/áudio/Água_coca_latao.m4a')
-rapaiz = pygame.mixer.Sound('assets/áudio/Rapaz_Xaropinho.m4a')
-'''
+uhul = pygame.mixer.Sound('assets/áudio/Uhul _Zé_Roberto (online-audio-converter.com).mp3')
+mary = pygame.mixer.Sound('assets/áudio/Água_coca_latao (online-audio-converter.com).mp3')
+rapaiz = pygame.mixer.Sound('assets/áudio/Rapaz _Xaropinho (online-audio-converter.com).mp3')
+
 musica_menu = True
 
 # Lista de cartas e dicionário de pontuação
@@ -226,6 +233,9 @@ while jogo_rolando:
     jogada_player = True
     jogo_fim = False
     estouro = False
+    vitoria = False
+    derrota = False
+    empate = False
 
     i=0
     
@@ -420,7 +430,7 @@ while jogo_rolando:
                                 cartas.append(extra_mesa)
 
                         # Define situação que o jogador está com mais pontos que a mesa
-                        while pontuacao_player > pontuacao_mesa2:
+                        while pontuacao_player >= pontuacao_mesa2:
                             posicao_mesa += 20
                             delay += 0.6
                             extra_mesa = random.choice(lista_cartas)
@@ -508,22 +518,25 @@ while jogo_rolando:
                     if pontuacao_mesa > pontuacao_player:  # Derrota
                         resultado = fonte_placar.render('Perdeu!', True, vermelho)
                         resultado = Placar(resultado, 0, 0, delay)
-                        pericles = Carta(pericles_neutro, 0, 0, delay)
+                        pericles = Carta(pericles_triste, 0, 0, delay)
                         derrota = True
+                        
                     elif pontuacao_mesa == pontuacao_player:  # Empate
                         resultado = fonte_placar.render('Empate!', True, branco)
                         resultado = Placar(resultado, 0, 0, delay)
                         pericles = Carta(pericles_neutro, 0, 0, delay)
                         empate = True
+                        
                     else:  # Vitória
                         resultado = fonte_placar.render('Ganhou!', True, verde)
                         resultado = Placar(resultado, 0, 0, delay)
-                        pericles = Carta(pericles_neutro, 0, 0, delay)
+                        pericles = Carta(pericles_feliz, 0, 0, delay)
                         vitoria = True
+                        
                     
                     # Define texto de 'jogar novamente'
-                    jogar = fonte_placar.render('PRESSIONE QUALQUER TECLA', True, branco)
-                    novamente = fonte_placar.render('PARA JOGAR NOVAMENTE', True, branco)
+                    jogar = fonte_placar.render('PRESSIONE QUALQUER TECLA', True, preto)
+                    novamente = fonte_placar.render('PARA JOGAR NOVAMENTE', True, preto)
                     jogar = Placar(jogar, 180, 0, delay)
                     novamente = Placar(novamente, 200, 50, delay)
 
@@ -598,9 +611,18 @@ while jogo_rolando:
             # Exibe o resultado
             if resultado.exibir:
                 janela.blit(resultado.text, resultado.rect)
-                uhul.play()
+                if vitoria == True:
+                    uhul.play()
+                    vitoria = False
+                if derrota == True:
+                    rapaiz.play()
+                    derrota = False
+                if empate == True:
+                    mary.play()
+                    empate = False
             else:
                 resultado.update()
+            
 
             # Exibe texto de jogar novamente
             if jogar.exibir:
