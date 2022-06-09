@@ -16,7 +16,7 @@ pygame.display.set_caption('Blackjack')
 
 # Imagens
 tela_de_fundo = pygame.image.load('assets/img/mesa.jpg').convert()
-tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').convert()
+#tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').convert()
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
 tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
@@ -250,10 +250,10 @@ while jogo_rolando:
 
                 if pontuacao_player1 == pontuacao_player2:
                     pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, branco)
-                    pontuacaojogador = Placar(pontuacaojogador,275,325,0.3)
+                    pontuacaojogador = Placar(pontuacaojogador,525,325,0.3)
                 else:
                     pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, branco)
-                    pontuacaojogador = Placar(pontuacaojogador,200,325,0.3)
+                    pontuacaojogador = Placar(pontuacaojogador,525,325,0.3)
 
                 pp.append(pontuacaojogador)
                 
@@ -271,10 +271,10 @@ while jogo_rolando:
                 
                 if pontuacao_mesa1 == pontuacao_mesa2:
                     pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
-                    pontuacaomesa = Placar(pontuacaomesa,275,125,0.6)
+                    pontuacaomesa = Placar(pontuacaomesa,525,100,0.6)
                 else:
                     pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
-                    pontuacaomesa = Placar(pontuacaomesa,200,125,0.6)
+                    pontuacaomesa = Placar(pontuacaomesa,525,100,0.6)
 
                 pm.append(pontuacaomesa)
                 
@@ -292,10 +292,10 @@ while jogo_rolando:
                 
                 if pontuacao_player1 == pontuacao_player2:
                     pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, branco)
-                    pontuacaojogador = Placar(pontuacaojogador,275,325,0.9)
+                    pontuacaojogador = Placar(pontuacaojogador,525,325,0.9)
                 else:
                     pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, branco)
-                    pontuacaojogador = Placar(pontuacaojogador,200,325,0.9)
+                    pontuacaojogador = Placar(pontuacaojogador,525,325,0.9)
 
                 pp.append(pontuacaojogador)
                 
@@ -310,7 +310,7 @@ while jogo_rolando:
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if i < 1:  # Uma vez que clicou o segurar, não é possível comprar e segurar mais
-                    if 600 <= mouse[0] <= 600+largura_botao and 250 <= mouse[1] <= 250+altura_botao:  # Clique no botão de comprar
+                    if 100 <= mouse[0] <= 100+largura_botao and 250 <= mouse[1] <= 250+altura_botao:  # Clique no botão de comprar
                         posicao_player += 20
                         delay = 0.4
                         extra_player = random.choice(lista_cartas)
@@ -330,14 +330,14 @@ while jogo_rolando:
 
                         if pontuacao_player1 == pontuacao_player2:
                             pontuacaojogador = fonte_placar.render(str(pontuacao_player1), True, branco)
-                            pontuacaojogador = Placar(pontuacaojogador,275,325,delay)
+                            pontuacaojogador = Placar(pontuacaojogador,525,325,delay)
                         else:
                             if pontuacao_player2 <= 21 and pontuacao_player1 <= 21:
                                 pontuacaojogador = fonte_placar.render('{} ou {}'.format(pontuacao_player1, pontuacao_player2), True, branco)
-                                pontuacaojogador = Placar(pontuacaojogador,200,325,delay)
+                                pontuacaojogador = Placar(pontuacaojogador,525,325,delay)
                             elif pontuacao_player1 <= 21 and pontuacao_player2 > 21:
                                 pontuacaojogador = fonte_placar.render('{}'.format(pontuacao_player1), True, branco)
-                                pontuacaojogador = Placar(pontuacaojogador,275,325,delay)
+                                pontuacaojogador = Placar(pontuacaojogador,525,325,delay)
 
                         pp.append(pontuacaojogador)
 
@@ -357,7 +357,7 @@ while jogo_rolando:
                     if pontuacao_player1 > 21:
                         pontuacao_player = 0 
 
-                    if 600 <= mouse[0] <= 600+largura_botao and 175 <= mouse[1] <= 175+altura_botao and jogo_fim == False: # Clique no botão de segurar
+                    if 100 <= mouse[0] <= 100+largura_botao and 175 <= mouse[1] <= 175+altura_botao and jogo_fim == False: # Clique no botão de segurar
 
                         # Impossibilita o comprar/segurar até que jogue novamente
                         i=1
@@ -375,10 +375,10 @@ while jogo_rolando:
 
                         if pontuacao_mesa1 == pontuacao_mesa2:
                             pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
-                            pontuacaomesa = Placar(pontuacaomesa,275,125,delay)
+                            pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
                         else:
                             pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
-                            pontuacaomesa = Placar(pontuacaomesa,200,125,delay)
+                            pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
 
                         pm.append(pontuacaomesa)
 
@@ -408,10 +408,10 @@ while jogo_rolando:
 
                                 if pontuacao_mesa1 == pontuacao_mesa2:
                                     pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,275,125,delay)
+                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
                                 else:
                                     pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,200,125,delay)
+                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
 
                                 pm.append(pontuacaomesa)
 
@@ -439,10 +439,10 @@ while jogo_rolando:
 
                             if pontuacao_mesa1 == pontuacao_mesa2:
                                     pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,275,125,delay)
+                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
                             else:
                                 pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
-                                pontuacaomesa = Placar(pontuacaomesa,200,125,delay)
+                                pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
 
                             pm.append(pontuacaomesa)
                             
@@ -471,10 +471,10 @@ while jogo_rolando:
                                 
                                 if pontuacao_mesa1 == pontuacao_mesa2:
                                     pontuacaomesa = fonte_placar.render(str(pontuacao_mesa1), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,275,125,delay)
+                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
                                 else:
                                     pontuacaomesa = fonte_placar.render('{} ou {}'.format(pontuacao_mesa1, pontuacao_mesa2), True, branco)
-                                    pontuacaomesa = Placar(pontuacaomesa,200,125,delay)
+                                    pontuacaomesa = Placar(pontuacaomesa,525,100,delay)
 
                                 pm.append(pontuacaomesa)
                                 
@@ -501,7 +501,7 @@ while jogo_rolando:
                         estourou = Placar(estourou, 350, 225, delay)
 
                     # Define delay para aparecer resultado
-                    delay = delay + 1
+                    delay = delay + 1.7
                     
                     # Verifica e define texto para os resultados 
                     if pontuacao_mesa > pontuacao_player:  # Derrota
@@ -555,13 +555,13 @@ while jogo_rolando:
         # Desenha a pontuação do jogador para cada virada de carta
         for pontuacao in pp:
             if pontuacao.exibir:
-                janela.blit(tampa_placar_ajustado, (200,325))  
+                janela.blit(tampa_placar_ajustado, (500,325))  
                 janela.blit(pontuacao.text,pontuacao.rect)
             else:
                 pontuacao.update()
         for pontuacao in pm:
             if pontuacao.exibir:
-                janela.blit(tampa_placar_ajustado, (200,125))
+                janela.blit(tampa_placar_ajustado, (500,100))
                 janela.blit(pontuacao.text,pontuacao.rect)
             else:
                 pontuacao.update()
@@ -575,8 +575,8 @@ while jogo_rolando:
 
         # Desenha os botões 'comprar' e 'segurar' enquanto o player puder escolher alguma dessas opções
         if jogada_player == True:
-            janela.blit(botao_comprar, (600,250))
-            janela.blit(botao_segurar, (600,175))
+            janela.blit(botao_comprar, (100,250))
+            janela.blit(botao_segurar, (100,175))
 
         # Quando as possíveis interações do usuário terminam
         if jogo_fim == True:
