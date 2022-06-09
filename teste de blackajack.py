@@ -20,7 +20,7 @@ tela_de_fundo = pygame.image.load('assets/img/penup_1654060177597432-1.jpg').con
 tela_de_fundo_ajustada = pygame.transform.scale(tela_de_fundo, (largura, altura))
 
 tampa_placar = pygame.image.load('assets/img/tampa placar.jpg').convert()
-tampa_placar_ajustado = pygame.transform.scale(tampa_placar, (125, 50))
+tampa_placar_ajustado = pygame.transform.scale(tampa_placar, (140, 50))
 
 carta_back = pygame.image.load('assets/img/cartas/cardback.png').convert()
 #carta_back_ajustada = pygame.transform.scale(carta_back, (75, 110))
@@ -84,6 +84,7 @@ botao_comprar = pygame.image.load('assets/img/botao_buy.png').convert()
 botao_comprar = pygame.transform.scale(botao_comprar, (largura_botao, altura_botao))
 botao_segurar = pygame.image.load('assets/img/botao_stand.png').convert()
 botao_segurar = pygame.transform.scale(botao_segurar, (largura_botao, altura_botao))
+
 
 pericles_neutro =  pygame.image.load('assets/img/pericles.jpg').convert()
 pericles_neutro = pygame.transform.scale(pericles_neutro, (largura, altura))
@@ -509,7 +510,6 @@ while jogo_rolando:
                 
                 i=0
 
-  
         mouse = pygame.mouse.get_pos()
 
         janela.blit(tela_de_fundo_ajustada, (0,0))
